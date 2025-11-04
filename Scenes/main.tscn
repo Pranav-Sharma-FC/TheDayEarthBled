@@ -1,7 +1,19 @@
-[gd_scene format=3 uid="uid://d2dupnj8vilps"]
+[gd_scene load_steps=3 format=3 uid="uid://d2dupnj8vilps"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Script" uid="uid://drmp7l3pvqext" path="res://Scenes/Player.cs" id="1_bo1nx"]
+[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
+
+[node name="GameManager" type="Node2D"]
 
 [node name="Player" type="Node2D" parent="."]
+script = ExtResource("1_bo1nx")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="ExampleSprite" type="Sprite2D" parent="."]
+position = Vector2(55, -222)
+texture = ExtResource("1_jjgbg")
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Entities" type="Node2D" parent="."]
