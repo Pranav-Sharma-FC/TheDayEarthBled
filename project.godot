@@ -13,6 +13,14 @@ config_version=5
 config/name="Multiplayer Project"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 
+[autoload]
+
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+runtime/advanced/uses_dotnet=true
+
 [display]
 
 window/size/viewport_width=1920
@@ -23,6 +31,10 @@ window/size/borderless=true
 [dotnet]
 
 project/assembly_name="Multiplayer Project"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [file_customization]
 
