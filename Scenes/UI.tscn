@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cihxmmj35s8b0"]
+[gd_scene load_steps=2 format=3 uid="uid://cihxmmj35s8b0"]
+
+[ext_resource type="Texture2D" uid="uid://dl3dn1y7lwsy" path="res://Assets/ExampleSprite.png" id="1_w371h"]
 
 [node name="Viewport" type="Control"]
 layout_mode = 3
@@ -14,7 +16,7 @@ offset_right = 2139.0
 offset_bottom = 27.0
 rotation = 0.652969
 
-[node name="ColorRect" type="ColorRect" parent="topRight"]
+[node name="trRect" type="ColorRect" parent="topRight"]
 layout_mode = 0
 offset_left = 1241.0
 offset_right = 1811.0
@@ -32,10 +34,29 @@ text = "Carrier Fleet "
 
 [node name="TextureRect" type="TextureRect" parent="topRight"]
 layout_mode = 0
-offset_left = 1584.0
-offset_top = 14.0
-offset_right = 1641.0
-offset_bottom = 60.0
+offset_left = 1553.0
+offset_right = 1643.0
+offset_bottom = 54.0
+texture = ExtResource("1_w371h")
+expand_mode = 1
+
+[node name="icon" type="TextureRect" parent="topRight"]
+layout_mode = 0
+offset_left = 1860.0
+offset_top = 75.0
+offset_right = 1903.0
+offset_bottom = 104.0
+texture = ExtResource("1_w371h")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="topRight"]
+layout_mode = 0
+offset_left = 1731.0
+offset_top = 2.0
+offset_right = 1821.0
+offset_bottom = 56.0
+texture = ExtResource("1_w371h")
+expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="topRight"]
 layout_mode = 0
@@ -43,3 +64,19 @@ offset_left = 1824.0
 offset_top = 17.0
 offset_right = 1881.0
 offset_bottom = 63.0
+
+[node name="ColorRect" type="ColorRect" parent="topRight"]
+layout_mode = 0
+offset_left = 1664.0
+offset_top = 18.0
+offset_right = 1712.0
+offset_bottom = 52.0
+color = Color(0.990596, 0, 0.258495, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="topRight"]
+layout_mode = 0
+offset_left = 1841.0
+offset_top = 23.0
+offset_right = 1889.0
+offset_bottom = 57.0
+color = Color(0.990596, 0, 0.258495, 1)
