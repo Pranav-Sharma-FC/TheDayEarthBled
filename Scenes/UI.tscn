@@ -80,3 +80,11 @@ offset_top = 23.0
 offset_right = 1889.0
 offset_bottom = 57.0
 color = Color(0.990596, 0, 0.258495, 1)
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 1238.0
+offset_top = 92.0
+offset_right = 1790.0
+offset_bottom = 108.0
+value = 5.0
