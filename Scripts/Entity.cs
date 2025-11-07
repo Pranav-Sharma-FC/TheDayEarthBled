@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public abstract class Entity : CharacterBody2D
+public abstract partial class Entity : CharacterBody2D
 {
     [Export] private float _acceleration = 600f;   // How fast the ship accelerates
     [Export] private float _friction = 20f;       // Slows ship down when no input

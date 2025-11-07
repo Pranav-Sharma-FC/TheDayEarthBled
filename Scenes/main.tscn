@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://d2dupnj8vilps"]
+[gd_scene load_steps=7 format=4 uid="uid://d2dupnj8vilps"]
 
+[ext_resource type="Script" uid="uid://cxdqpqrepqf4j" path="res://Scripts/Gamemanager.cs" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cfoi8biflsrk3" path="res://Scenes/player.tscn" id="1_bo1nx"]
 [ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
 
@@ -62,11 +63,12 @@ tile_size = Vector2i(160, 160)
 sources/0 = SubResource("TileSetAtlasSource_bo1nx")
 sources/1 = SubResource("TileSetAtlasSource_8gbba")
 
-[node name="GameManager" type="Node2D"]
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("_players")]
+script = ExtResource("1_8gbba")
+_player = ExtResource("1_bo1nx")
+_players = NodePath("Players")
 
 [node name="Players" type="Node2D" parent="."]
-
-[node name="Player" parent="Players" instance=ExtResource("1_bo1nx")]
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -75,3 +77,6 @@ tile_map_data = PackedByteArray("AADz//b/AQAAAAEAAADz//f/AQAAAAEAAADz//j/AQAAAAE
 tile_set = SubResource("TileSet_jjvhh")
 
 [node name="Entities" type="Node2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="Entities"]
+zoom = Vector2(0.5, 0.5)
