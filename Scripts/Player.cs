@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody2D
+public partial class Player : Entity
 {
 	[Export] public int DeviceId = 0;
 	[Export] private float _acceleration = 600f;
@@ -9,11 +9,12 @@ public partial class Player : CharacterBody2D
 	[Export] private float _maxSpeed = 600f;
 
 	private Vector2 _velocity = Vector2.Zero;
-	private bool _activeThisFrame = false; // Only true if this player's device had input this frame
+	private bool _activeThisFrame = true; // Only true if this player's device had input this frame
 
 	// Called by GameManager
-	public void HandleInput(InputEvent @event)
+	public void _Input(InputEvent @event)
 	{
+		GD.Print(@event.Device);
 		if (@event.Device != DeviceId)
 			return;
 
@@ -24,6 +25,13 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		// Only check Input.IsActionPressed if this player is active this frame
+		MoveCharacter();
+		// Reset for next frame
+		//_activeThisFrame = false;
+	}
+
+	public override void MoveCharacter()
+	{
 		if (_activeThisFrame)
 		{
 			Vector2 input = Vector2.Zero;
@@ -36,6 +44,8 @@ public partial class Player : CharacterBody2D
 				input.Y -= 1;
 			if (Input.IsActionPressed("thrust_down"))
 				input.Y += 1;
+
+			GD.Print(Input.IsActionPressed("thrust_down"));
 
 			input = input.Normalized();
 
@@ -50,8 +60,17 @@ public partial class Player : CharacterBody2D
 			Velocity = new Vector2(_velocity.X, _velocity.Y);
 			MoveAndSlide();
 		}
-
-		// Reset for next frame
-		_activeThisFrame = false;
 	}
+	public override void TakeDamage(Vector2 direction)
+    {
+        //
+    }
+	public override void SpecialEffects(Vector2 direction)
+    {
+        
+    }
+	public override void HealthReload(Vector2 direction)
+    {
+        
+    }
 }
