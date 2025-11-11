@@ -7,7 +7,7 @@ public partial class Gamemanager : Node2D
 	[Export] private Node2D _players;
 	public override void _Ready()
 	{
-		for (int i = (Input.GetConnectedJoypads().Count); i >= 0; i--)
+		for (int i = (Input.GetConnectedJoypads().Count); i > 0; i--)
 		{
 			Player player = _player.Instantiate() as Player;
 			_players.AddChild(player);
