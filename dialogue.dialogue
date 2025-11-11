@@ -1,11 +1,12 @@
 ~ start
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
-- Start again => start
-- End the conversation => END
-Nathan: For more information see the online documentation.
-=> END
+Rear Admiral Takahashi (callsign KODIAK-ACTUAL):
+“Fleet Command, this is Kodiak. Indianapolis is gone. Repeat, gone. We’re pulling debris fields on all channels. Requesting immediate redeployment orders.”
+Admiral Harper (EAGLE-ONE):
+“Copy that, Kodiak. Hold formation at bearing two-one-five, mark three. All destroyers screen forward. We buy time until UNSCR Command goes dark.”
+Comms AI ‘ALYX-PROTOCOL’:
+“Warning. Darkened Sun entities breaching the Einstein-Rosen Bridge array. Estimated contact in T-minus six minutes.”
+Harper:
+“Six minutes to oblivion. Plenty of time to make them bleed.”Nathan: This is Some Dialogue
+
+=> END 
+

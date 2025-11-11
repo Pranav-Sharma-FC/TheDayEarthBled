@@ -1,0 +1,11 @@
+~ start
+Alyx-Protocol:
+“Admiral, use your right joystick to cycle fleet views. Left stick to adjust formation bearing. Camera lock to Sector Tango-Four.”
+Rear Admiral Singh (PHOENIX-LEAD):
+“Eagle-One, this is Phoenix. Our frigate screen is ready for rally. UNSF Roosevelt and Yamato report green lights on railgun capacitors.”
+Harper:
+“Good. Signal ‘Ready Room Bravo’. Weapons free on all hostiles. Confirm IFF before firing—aliens are spoofing transponders.”
+[Combat Cue]
+“Contact left! Bearing zero-seven-zero! Enemy corvettes breaking formation! Fox-3, Fox-3!”
+
+=> END
