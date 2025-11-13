@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cihxmmj35s8b0"]
+[gd_scene load_steps=5 format=3 uid="uid://cihxmmj35s8b0"]
 
 [ext_resource type="Texture2D" uid="uid://dl3dn1y7lwsy" path="res://Assets/ExampleSprite.png" id="1_w371h"]
+[ext_resource type="Script" uid="uid://crtgjcwv1hv12" path="res://Scripts/HSlider.cs" id="2_nxvpl"]
 
 [sub_resource type="Shader" id="Shader_w371h"]
 code = "shader_type canvas_item;
@@ -105,6 +106,7 @@ offset_top = 89.0
 offset_right = 1793.0
 offset_bottom = 105.0
 value = 5.0
+script = ExtResource("2_nxvpl")
 
 [node name="HSlider2" type="HSlider" parent="topRight"]
 layout_mode = 0
