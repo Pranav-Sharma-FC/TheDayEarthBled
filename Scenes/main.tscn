@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cxdqpqrepqf4j" path="res://Scripts/Gamemanager.cs" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cfoi8biflsrk3" path="res://Scenes/player.tscn" id="1_bo1nx"]
-[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://c86qb7qvl7j10" path="res://Scripts/Camera.cs" id="4_jjvhh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
@@ -72,6 +72,7 @@ _players = NodePath("Players")
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Player" parent="Players" instance=ExtResource("1_bo1nx")]
+position = Vector2(0, 500)
 
 [node name="FunTime" parent="Players" instance=ExtResource("1_bo1nx")]
 position = Vector2(1034, -409)
@@ -81,7 +82,6 @@ position = Vector2(-1061, -395)
 
 [node name="CameraTest" parent="Players" instance=ExtResource("1_bo1nx")]
 position = Vector2(-11, 1196)
-player2 = true
 _acceleration = 100.0
 
 [node name="Background" type="Node2D" parent="."]
@@ -92,8 +92,6 @@ tile_set = SubResource("TileSet_jjvhh")
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("player1", "player2")]
+[node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("4_jjvhh")
-player1 = NodePath("../Players/Player")
-player2 = NodePath("../Players/CameraTest")
