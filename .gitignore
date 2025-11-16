@@ -35,3 +35,6 @@ logs/
 
 # Rider
 .idea/*
+
+#Godot Wakatime
+addons/*
