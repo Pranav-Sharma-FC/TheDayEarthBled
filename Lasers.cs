@@ -1,16 +1,15 @@
-using Godot;
-using Godot;
-using System;
-
-{public partial class Lasers : Node2D}
-//Weapons for the aircraft
-
 using System;
 using System.Collections.Generic;
-using System.Numerics; // for Vector2 (add System.Numerics reference if needed)
-using System.Reflection.Metadata;
 using System.Threading;
+using Godot; // Only needed if you actually want Godot Vector2; else replace with custom struct
 
+{{}}public partial class Lasers : Node2D{}
+public partial class Lasers : Node2D
+{
+	// class content
+}
+
+//Weapons for the aircraft
 namespace WeaponDemo
 {
 	// Simple interface for weapons
@@ -38,7 +37,7 @@ namespace WeaponDemo
 	}
 
 	// Base weapon providing cooldown tracking
-	public abstract interface Lasers
+	public class Lasers
 	{
 
 	}
