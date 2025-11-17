@@ -1,8 +1,9 @@
 using Godot;
+using Godot;
 using System;
 
-public partial class Lasers : Node2D
-{//Weapons for the aircraft
+{public partial class Lasers : Node2D}
+//Weapons for the aircraft
 
 using System;
 using System.Collections.Generic;

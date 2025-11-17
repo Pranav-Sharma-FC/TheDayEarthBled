@@ -1,8 +1,4 @@
-using Godot;
-using System;
-
-public partial class Missles : Node2D
-{    // Missile — homing projectile with splash damage
+	// Missile — homing projectile with splash damage
 	public class Missile : WeaponBase
 	{
 		public float Damage { get; private set; }
@@ -92,4 +88,3 @@ public partial class Missles : Node2D
 			}
 		}
 	}
-}
