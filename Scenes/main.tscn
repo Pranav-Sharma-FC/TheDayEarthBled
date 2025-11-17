@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://d2dupnj8vilps"]
+[gd_scene load_steps=10 format=4 uid="uid://d2dupnj8vilps"]
 
 [ext_resource type="Script" uid="uid://cxdqpqrepqf4j" path="res://Scripts/Gamemanager.cs" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cfoi8biflsrk3" path="res://Scenes/player.tscn" id="1_bo1nx"]
-[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://c86qb7qvl7j10" path="res://Scripts/Camera.cs" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://cihxmmj35s8b0" path="res://Scenes/UI.tscn" id="5_kry3j"]
+[ext_resource type="Script" uid="uid://b4clsk4ukde7" path="res://Scripts/UIPanel.cs" id="6_21xkr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bo1nx"]
 texture = ExtResource("1_jjgbg")
@@ -95,3 +97,8 @@ tile_set = SubResource("TileSet_jjvhh")
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("4_jjvhh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Viewport" parent="CanvasLayer" instance=ExtResource("5_kry3j")]
+script = ExtResource("6_21xkr")

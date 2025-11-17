@@ -10,6 +10,9 @@ public abstract partial class Entity : CharacterBody2D
 	
 	[Export] public int Health { get; set; } = 100;
 	[Export] public int MaxHealth { get; set; } = 100;
+	[Export] public int Sheilds { get; set; } = 100;
+	[Export] public int MaxSheilds { get; set; } = 100;
+	[Export] public int SheildRegenSeconds { get; set; } = 1;
 	
 	[Export] public int Damage { get; set; } = 100;
 
