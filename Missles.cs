@@ -1,90 +1,42 @@
-	// Missile — homing projectile with splash damage
-	public class Missile : WeaponBase
+using System;
+using Godot;
+
+// Target class already exists
+// public class Target { public Vector2 Position { get; } public bool IsAirborne { get; } ... }
+
+// Base weapon exists: WeaponBase : IWeapon
+
+// Missile — homing projectile with splash damage
+public class Missile : WeaponBase
+{
+	public float Damage { get; private set; } = 80f;
+	public float Speed { get; private set; } = 50f;
+	public float SplashRadius { get; private set; } = 3f;
+	public override void Fire(Target target)
 	{
-		public float Damage { get; private set; }
-		public float Speed { get; private set; }
-		public float SplashRadius { get; private set; }
-
-		public Missile()
+		if (!CanFire)
 		{
-			Name = "Missile";
-			Cooldown = 2.0f;
-			Damage = 80;
-			Speed = 50;
-			SplashRadius = 3.0f;
+			Console.WriteLine($"{Name} cannot fire yet ({timeUntilReady:F2}s cooldown).");
+			return;
 		}
 
-		public override void Fire(Target target)
-		{
-			base.Fire(target);
-			if (!CanFire) return; // base.Fire set cooldown; re-check not strictly necessary
+		base.Fire(target);
+		Console.WriteLine($"{Name} launched toward target at {target.Position} (Homing)");
 
-			Console.WriteLine($"{Name} launched toward target at {target.Position}. (Homing)");
-			// In a real game you'd spawn a projectile object; here we just simulate immediate hit for demo:
-			SimulateHit(target);
-		}
-
-		private void SimulateHit(Target target)
-		{
-			// simple hit simulation
-			Console.WriteLine($"Missile hits near {target.Position}, dealing {Damage} damage and {SplashRadius} splash.");
-			target.Health -= Damage;
-			if (target.Health <= 0) Console.WriteLine("Target destroyed by missile!");
-			else Console.WriteLine($"Target health: {target.Health:F1}");
-		}
+		SimulateHit(target);
 	}
 
-	// Laser — instant-hit beam with overheat/energy mechanic
-	public class Laser : WeaponBase
+	private void SimulateHit(Target target)
 	{
-		public float DamagePerSecond { get; private set; }
-		public float Energy { get; private set; }
-		public float MaxEnergy { get; private set; }
-		public float EnergyPerSecond { get; private set; } // cost while firing
-		private bool isFiring = false;
-
-		public Laser()
-		{
-			Name = "Laser";
-			Cooldown = 0.1f; // can try to fire often but uses energy
-			DamagePerSecond = 40f;
-			MaxEnergy = 5f;
-			Energy = MaxEnergy;
-			EnergyPerSecond = 1.5f;
-		}
-
-		public override void Fire(Target target)
-		{
-			if (Energy <= 0)
-			{
-				Console.WriteLine($"{Name} has overheated / depleted energy.");
-				return;
-			}
-
-			// Start continuous firing for one tick (simulation)
-			isFiring = true;
-			Console.WriteLine($"{Name} fires a beam at {target.Position}.");
-			// Apply damage for a single frame (in real game you'd apply per-second in Update)
-			float damageThisTick = DamagePerSecond * 0.1f; // assuming 0.1s tick for this demo
-			target.Health -= damageThisTick;
-			Energy -= EnergyPerSecond * 0.1f;
-			Console.WriteLine($"Dealt {damageThisTick:F1} dmg. Energy left: {Energy:F2}");
-			if (target.Health <= 0) Console.WriteLine("Target destroyed by laser!");
-			base.Fire(target);
-		}
-
-		public override void Update(float deltaTime)
-		{
-			base.Update(deltaTime);
-			if (isFiring)
-			{
-				// if we were in continuous fire mode, drain more energy (for demo we turn it off immediately)
-				isFiring = false;
-			}
-			else
-			{
-				// recharge energy when not firing
-				Energy = MathF.Min(MaxEnergy, Energy + 0.5f * deltaTime);
-			}
-		}
+		Console.WriteLine($"Missile hits near {target.Position}, dealing {Damage} damage and {SplashRadius} splash.");
+		// For demonstration, reduce Health if Target has Health property
+		// target.Health -= Damage;
+		// Console.WriteLine(target.Health <= 0 ? "Target destroyed!" : $"Target health: {target.Health:F1}");
 	}
+
+	private override void Update(float deltaTime)
+	{
+		base.Update(deltaTime);
+		// Missile-specific logic could go here (homing, travel, etc.)
+	}
+}
