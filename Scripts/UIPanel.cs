@@ -5,21 +5,40 @@ using Godot.NativeInterop;
 
 public partial class UIPanel : Control
 {
-    [Export] public Control Player1;
-    [Export] public Control Player2;
-    [Export] public Control Player3;
-    [Export] public Control Player4;
-    public Dictionary ControlDict;
+    [Export] public ShipPanel Player1Control;
+    [Export] public ShipPanel Player2Control;
+    [Export] public ShipPanel Player3Control;
+    [Export] public ShipPanel Player4Control;
+    private Dictionary _controlDict;
+    [Export] public Player Player1;
+    [Export] public Player Player2;
+    [Export] public Player Player3;
+    [Export] public Player Player4;
     public override void _Ready()
     {
-        Dictionary tempDict = new Dictionary
+        Dictionary tempControlDict = new Dictionary
         {
-            { Player1, 1 },
-            { Player2, 2 },
-            { Player3, 3 },
-            { Player4, 4 },
+            { Player1Control, Player1 },
+            { Player2Control, Player2 },
+            { Player3Control, Player3 },
+            { Player4Control, Player4},
         };
-        ControlDict = tempDict;
+        _controlDict = tempControlDict;
     }
+    
+    public override void _Process(double delta)
+    {
+        foreach (var kvp in _controlDict)
+        {
+            Player player = kvp.Value.As<Player>();
+            ShipPanel controls = kvp.Key.As<ShipPanel>();
+            Dictionary playerDict = player.GetStats();
+            controls
+                
+                .GetValues(playerDict["Health"].As<double>(),
+                playerDict["Sheild"].As<double>());
+        }
+    }
+    
 }
     

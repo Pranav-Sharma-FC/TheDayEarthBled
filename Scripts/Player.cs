@@ -1,7 +1,8 @@
 using Godot;
+using Godot.Collections;
 using System;
 
-partial class Player : Entity
+public partial class Player : Entity
 {
 	[Export] public int DeviceId = 0;
 	[Export] public bool player2; //Temporary bool
@@ -57,7 +58,7 @@ partial class Player : Entity
 		}
 	}
 
-	public override void MoveCharacter(double delta)
+	protected override void MoveCharacter(double delta)
 	{
 		//if (_activeThisFrame)
 		//{
@@ -68,12 +69,27 @@ partial class Player : Entity
 	{
 		//
 	}
-	public override void SpecialEffects(Vector2 direction)
+	protected override void SpecialEffects()
 	{
 		
 	}
-	public override void HealthReload(Vector2 direction)
+	protected override void HealthReload()
 	{
 		
+	}
+
+	protected override void Fire()
+	{
+		
+	}
+
+	public override Dictionary GetStats()
+	{
+		Dictionary itemsDict = new Dictionary()
+		{
+			{"Health", Health},
+			{"Sheild", Sheilds},
+		};
+		return itemsDict;
 	}
 }

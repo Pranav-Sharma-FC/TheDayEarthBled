@@ -3,14 +3,20 @@ using System;
 
 public partial class ShipPanel : Control
 { 
-    [Export] public HSlider Health;
-    [Export] public HSlider Sheilds;
-    [Export] public double HealthValue;
-    [Export] public double SheildsValue;
+    [Export] private Godot.HSlider _health;
+    [Export] private Godot.HSlider _sheilds;
+    [Export] private double _healthValue;
+    [Export] private double _sheildsValue;
 
     public override void _PhysicsProcess(double delta)
     {
-        Health.Value = HealthValue;
-        Sheilds.Value = SheildsValue;
+        _health.Value = _healthValue;
+        _sheilds.Value = _sheildsValue;
+    }
+
+    public void GetValues(double healthValue, double sheildsValue)
+    {
+        _healthValue = healthValue;
+        _sheildsValue = sheildsValue;
     }
 }

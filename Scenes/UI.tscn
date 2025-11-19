@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cihxmmj35s8b0"]
+[gd_scene load_steps=7 format=3 uid="uid://cihxmmj35s8b0"]
 
 [ext_resource type="Script" uid="uid://bacljpta2jtpq" path="res://Scripts/ShipPanel.cs" id="1_dewlx"]
+[ext_resource type="Script" uid="uid://b4clsk4ukde7" path="res://Scripts/UIPanel.cs" id="1_hfhsn"]
 [ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_w371h"]
 [ext_resource type="Script" uid="uid://crtgjcwv1hv12" path="res://Scripts/HSlider.cs" id="2_nxvpl"]
 
@@ -24,13 +25,20 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nxvpl"]
 shader = SubResource("Shader_w371h")
 
-[node name="Viewport" type="Control"]
+[node name="Viewport" type="Control" node_paths=PackedStringArray("Player1Control", "Player2Control", "Player3Control", "Player4Control")]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_hfhsn")
+Player1Control = NodePath("topLeft")
+Player2Control = NodePath("topRight")
+Player3Control = NodePath("bottomRight")
+Player4Control = NodePath("bottomLeft")
 
-[node name="topRight" type="Control" parent="."]
+[node name="topRight" type="Control" parent="." node_paths=PackedStringArray("_health", "_sheilds")]
 anchors_preset = 0
 script = ExtResource("1_dewlx")
+_health = NodePath("HSlider")
+_sheilds = NodePath("HSlider2")
 
 [node name="trTriangle" type="ColorRect" parent="topRight"]
 layout_mode = 0
@@ -118,13 +126,15 @@ offset_right = 1836.0
 offset_bottom = 133.0
 value = 5.0
 
-[node name="topLeft" type="Control" parent="."]
+[node name="topLeft" type="Control" parent="." node_paths=PackedStringArray("_health", "_sheilds")]
 anchors_preset = 0
 offset_left = -94.0
 offset_top = 202.0
 offset_right = -94.0
 offset_bottom = 202.0
 script = ExtResource("1_dewlx")
+_health = NodePath("HSlider")
+_sheilds = NodePath("HSlider2")
 
 [node name="trTriangle" type="ColorRect" parent="topLeft"]
 layout_mode = 0
@@ -284,9 +294,11 @@ offset_bottom = 1283.0
 rotation = -2.11672
 color = Color(0.34902, 0.34902, 0.34902, 1)
 
-[node name="bottomRight" type="Control" parent="."]
+[node name="bottomRight" type="Control" parent="." node_paths=PackedStringArray("_health", "_sheilds")]
 anchors_preset = 0
 script = ExtResource("1_dewlx")
+_health = NodePath("HSlider")
+_sheilds = NodePath("HSlider2")
 
 [node name="trTriangle" type="ColorRect" parent="bottomRight"]
 layout_mode = 0
@@ -375,9 +387,11 @@ offset_right = 1795.0
 offset_bottom = 977.0
 value = 5.0
 
-[node name="bottomLeft" type="Control" parent="."]
+[node name="bottomLeft" type="Control" parent="." node_paths=PackedStringArray("_health", "_sheilds")]
 anchors_preset = 0
 script = ExtResource("1_dewlx")
+_health = NodePath("HSlider4")
+_sheilds = NodePath("HSlider3")
 
 [node name="HSlider4" type="HSlider" parent="bottomLeft"]
 layout_mode = 0
