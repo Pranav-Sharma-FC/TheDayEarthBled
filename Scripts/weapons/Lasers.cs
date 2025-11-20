@@ -6,7 +6,7 @@ using Godot; // Only needed if you actually want Godot Vector2; else replace wit
 {{}}public partial class Lasers : Node2D{}
 public partial class Lasers : Node2D
 {
-	// class content
+    // class content
 }
 
 //Weapons for the aircraft
