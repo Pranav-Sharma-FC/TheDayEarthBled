@@ -15,15 +15,17 @@ public abstract partial class Entity : CharacterBody2D
 	[Export] protected int MaxSheilds { get; set; } = 100;
 	[Export] protected int SheildRegenSeconds { get; set; } = 1;
 	
-	[Export] protected int Damage { get; set; } = 100;
+	[Export] public int Damage { get; set; } = 100;
 
 	// Abstract method
 	protected abstract void MoveCharacter(double delta);
-	public abstract void TakeDamage(Vector2 direction);
+	public abstract void TakeDamage(int damage);
 	protected abstract void SpecialEffects();
 	protected abstract void HealthReload();
 	protected abstract void Fire();
 	
 	public abstract Dictionary GetStats();
-	
+
+	public abstract void Death();
+
 }

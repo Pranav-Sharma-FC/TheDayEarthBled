@@ -7,7 +7,10 @@
 size = Vector2(135, 238)
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_1f0kj")
+Damage = 50
 
 [node name="ExampleSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
@@ -20,3 +23,14 @@ flip_v = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(57.5, -109)
 shape = SubResource("RectangleShape2D_287tu")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(57.5, -109)
+shape = SubResource("RectangleShape2D_287tu")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

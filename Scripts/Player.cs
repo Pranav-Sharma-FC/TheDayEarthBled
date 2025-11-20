@@ -24,6 +24,10 @@ public partial class Player : Entity
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (Health <= 0)
+		{
+			Death();
+		}
 		if (!OutOfCameraRange)
 		{
 			//Only check Input.IsActionPressed if this player is active this frame
@@ -65,9 +69,9 @@ public partial class Player : Entity
 			
 		//}
 	}
-	public override void TakeDamage(Vector2 direction)
+	public override void TakeDamage(int enemysDamage)
 	{
-		//
+		Health -= enemysDamage;
 	}
 	protected override void SpecialEffects()
 	{
@@ -85,11 +89,27 @@ public partial class Player : Entity
 
 	public override Dictionary GetStats()
 	{
-		Dictionary itemsDict = new Dictionary()
+		Dictionary itemsDict = new Dictionary
 		{
 			{"Health", Health},
 			{"Sheild", Sheilds},
 		};
 		return itemsDict;
 	}
+
+	public override void Death()
+	{
+		this.QueueFree();
+	}
+
+	private void OnBodyEntered(Node2D body)
+	{
+		if (body is Enemy)
+		{
+			Enemy enemys = (Enemy)body;
+			TakeDamage(enemys.Damage);
+			enemys.TakeDamage(Damage);
+		}
+	}
+
 }

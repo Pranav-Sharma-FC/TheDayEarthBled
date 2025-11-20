@@ -33,9 +33,7 @@ public partial class UIPanel : Control
             Player player = kvp.Value.As<Player>();
             ShipPanel controls = kvp.Key.As<ShipPanel>();
             Dictionary playerDict = player.GetStats();
-            controls
-                
-                .GetValues(playerDict["Health"].As<double>(),
+            controls.GetValues(playerDict["Health"].As<double>(),
                 playerDict["Sheild"].As<double>());
         }
     }

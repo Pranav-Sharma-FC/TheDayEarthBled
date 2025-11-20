@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://d2dupnj8vilps"]
+[gd_scene load_steps=11 format=4 uid="uid://d2dupnj8vilps"]
 
 [ext_resource type="Script" uid="uid://cxdqpqrepqf4j" path="res://Scripts/Gamemanager.cs" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cfoi8biflsrk3" path="res://Scenes/player.tscn" id="1_bo1nx"]
 [ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://vadyegrxq2m7" path="res://Scripts/PlayerManager.cs" id="3_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bxx0l448l3pxh" path="res://Scenes/enemy.tscn" id="4_21xkr"]
 [ext_resource type="Script" uid="uid://c86qb7qvl7j10" path="res://Scripts/Camera.cs" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cihxmmj35s8b0" path="res://Scenes/UI.tscn" id="5_kry3j"]
@@ -72,6 +73,7 @@ _player = ExtResource("1_bo1nx")
 _players = NodePath("Players")
 
 [node name="Players" type="Node2D" parent="."]
+script = ExtResource("3_6bp64")
 
 [node name="Player" parent="Players" instance=ExtResource("1_bo1nx")]
 position = Vector2(0, 500)
@@ -84,7 +86,6 @@ position = Vector2(-1061, -395)
 
 [node name="CameraTest" parent="Players" instance=ExtResource("1_bo1nx")]
 position = Vector2(-11, 1196)
-_acceleration = 100.0
 
 [node name="Background" type="Node2D" parent="."]
 
