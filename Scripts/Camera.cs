@@ -21,6 +21,6 @@ public partial class Camera : Camera2D
 
 	public void CameraShake()
 	{
-		
+		//
 	}
 }

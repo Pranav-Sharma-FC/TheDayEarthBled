@@ -49,4 +49,15 @@ public partial class Enemy : Entity
     {
         this.QueueFree();
     }
+    
+    private void OnBodyEntered(Node2D body)
+    {
+        if (body is Player)
+        {
+            GD.Print("I am just a fish");
+            Enemy enemys = (Enemy)body;
+            TakeDamage(enemys.Damage);
+            enemys.TakeDamage(Damage);
+        }
+    }
 }

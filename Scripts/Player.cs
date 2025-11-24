@@ -6,6 +6,8 @@ public partial class Player : Entity
 {
 	[Export] public int DeviceId = 0;
 	[Export] public bool player2; //Temporary bool
+	[Export] private CharacterBody2D enemy;
+	[Export] private RayCast2D rayCast;
 	public bool OutOfCameraRange;
 	private Vector2 _velocity = Vector2.Zero;
 	private bool _activeThisFrame = true; // Only true if this player's device had input this frame
@@ -24,6 +26,7 @@ public partial class Player : Entity
 
 	public override void _PhysicsProcess(double delta)
 	{
+		AimWeapons();
 		if (Health <= 0)
 		{
 			Death();
@@ -106,10 +109,20 @@ public partial class Player : Entity
 	{
 		if (body is Enemy)
 		{
+			GD.Print("I am just a fish");
 			Enemy enemys = (Enemy)body;
 			TakeDamage(enemys.Damage);
 			enemys.TakeDamage(Damage);
 		}
+	}
+
+	private void AimWeapons()
+	{
+		if (!GodotObject.IsInstanceValid(enemy))
+			return
+				;
+		Vector2 targetPos = enemy.GlobalPosition;
+		rayCast.LookAt(targetPos);
 	}
 
 }

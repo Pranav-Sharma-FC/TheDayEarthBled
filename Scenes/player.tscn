@@ -6,14 +6,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
 size = Vector2(135, 238)
 
-[node name="Player" type="CharacterBody2D"]
-collision_mask = 2
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("rayCast")]
 motion_mode = 1
 wall_min_slide_angle = 0.74351
 script = ExtResource("1_cvnsp")
-_acceleration = 100.0
+player2 = true
+rayCast = NodePath("StraightFiring")
+_acceleration = 1000.0
 _friction = 5.0
-_maxSpeed = 100.0
+_maxSpeed = 1000.0
 
 [node name="ExampleSprite" type="Sprite2D" parent="."]
 position = Vector2(18.5, -87.5)
@@ -24,10 +25,20 @@ texture = ExtResource("2_6t5aa")
 shape = SubResource("RectangleShape2D_bo1nx")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_mask = 2
-monitorable = false
+collision_layer = 4
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_bo1nx")
+
+[node name="StraightFiring" type="RayCast2D" parent="."]
+target_position = Vector2(500, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="ColorRect" type="ColorRect" parent="StraightFiring"]
+offset_left = 2.0
+offset_top = -15.0
+offset_right = 607.0
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
