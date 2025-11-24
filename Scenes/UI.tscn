@@ -247,37 +247,37 @@ color = Color(0.34902, 0.34902, 0.34902, 1)
 
 [node name="ColorRect" type="ColorRect" parent="Middle"]
 layout_mode = 0
-offset_left = 717.0
-offset_top = 1034.0
-offset_right = 857.0
-offset_bottom = 1218.0
+offset_left = 723.0
+offset_top = 1038.0
+offset_right = 836.0
+offset_bottom = 1217.0
 rotation = -1.04205
 color = Color(0.34902, 0.34902, 0.34902, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="Middle"]
 layout_mode = 0
-offset_left = 1198.0
-offset_top = 992.0
-offset_right = 1359.0
-offset_bottom = 1446.0
+offset_left = 1178.0
+offset_top = 1003.0
+offset_right = 1257.0
+offset_bottom = 1437.0
 rotation = 1.5708
 color = Color(0.34902, 0.34902, 0.34902, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="Middle"]
 layout_mode = 0
 offset_left = 1149.0
-offset_top = 913.0
-offset_right = 1257.0
-offset_bottom = 1275.0
+offset_top = 938.0
+offset_right = 1231.0
+offset_bottom = 1307.0
 rotation = 1.5708
 color = Color(0.34902, 0.34902, 0.34902, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="Middle"]
 layout_mode = 0
-offset_left = 1082.0
-offset_top = 1118.0
-offset_right = 1222.0
-offset_bottom = 1283.0
+offset_left = 1099.0
+offset_top = 1151.0
+offset_right = 1254.0
+offset_bottom = 1303.0
 rotation = -2.11672
 color = Color(0.34902, 0.34902, 0.34902, 1)
 
