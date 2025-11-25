@@ -100,6 +100,9 @@ public class LAAA : WeaponBase
 			}
 		}
 	}
-}
 
-x
+	public async void getNode(Node2D Collisionbody2D)
+	{
+		GD.Print("eee");
+	}
+}

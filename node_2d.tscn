@@ -1,4 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://be8ovbq6nxlcl"]
+[gd_scene load_steps=8 format=3 uid="uid://be8ovbq6nxlcl"]
+
+[ext_resource type="Script" uid="uid://c5alwq4nbnmyc" path="res://Scripts/weapons/LAAA.cs" id="1_epypp"]
+[ext_resource type="Script" uid="uid://b7k6o4i8kr1dc" path="res://Scripts/weapons/Missles.cs" id="2_0hol4"]
+[ext_resource type="Script" uid="uid://emo33ipjbtuk" path="res://Scripts/weapons/Lasers.cs" id="3_q6r6c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y32ns"]
 
@@ -12,22 +16,47 @@ size = Vector2(145, 57)
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D LAAA" type="CharacterBody2D" parent="."]
+position = Vector2(-48, 0)
+script = ExtResource("1_epypp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D LAAA"]
 shape = SubResource("RectangleShape2D_y32ns")
 
+[node name="Area2D" type="Area2D" parent="CharacterBody2D LAAA"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D LAAA/Area2D"]
+shape = SubResource("RectangleShape2D_y32ns")
+
 [node name="CharacterBody2DMissles" type="CharacterBody2D" parent="."]
+position = Vector2(-68, -20)
+script = ExtResource("2_0hol4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2DMissles"]
 shape = SubResource("RectangleShape2D_wtcfe")
 
+[node name="Area2D" type="Area2D" parent="CharacterBody2DMissles"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2DMissles/Area2D"]
+shape = SubResource("RectangleShape2D_wtcfe")
+
 [node name="CharacterBody2D Lasers" type="CharacterBody2D" parent="."]
+position = Vector2(-88, 20)
+script = ExtResource("3_q6r6c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D Lasers"]
 shape = SubResource("RectangleShape2D_0e48y")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="target2" type="Area2D" parent="CharacterBody2D Lasers"]
+rotation = -0.0349066
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(62.5, 194.5)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D Lasers/target2"]
+position = Vector2(7.52509e-07, 1.19209e-06)
+rotation = 0.0349066
+shape = SubResource("RectangleShape2D_0e48y")
+
+[node name="target" type="Area2D" parent="."]
+position = Vector2(425, 0)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="target"]
 shape = SubResource("RectangleShape2D_epypp")

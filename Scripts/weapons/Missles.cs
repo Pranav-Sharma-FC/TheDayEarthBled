@@ -33,10 +33,8 @@ public class Missile : WeaponBase
 		// target.Health -= Damage;
 		// Console.WriteLine(target.Health <= 0 ? "Target destroyed!" : $"Target health: {target.Health:F1}");
 	}
-
-	private override void Update(float deltaTime)
+		public async void getNode(Node2D body)
 	{
-		base.Update(deltaTime);
-		// Missile-specific logic could go here (homing, travel, etc.)
+		GD.Print("eee");
 	}
 }

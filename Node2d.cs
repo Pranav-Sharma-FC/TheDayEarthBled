@@ -66,25 +66,7 @@ public partial class Node2d : Node2D
 
 	class Program
 	{
-		static void Main(string[] args)
 		{
-			var weapons = new List<IWeapon>
-			{
-				new Missile(),
-				new Laser(),
-				new LAAA()
-			};
-
-			var airborneTarget = new Target(new Vector2(100, 200), airborne: true);
-			var groundTarget = new Target(new Vector2(50, 10), airborne: false);
-
-			float tick = 0.1f; // 100 ms per update tick
-			float simTime = 0f;
-			float maxSim = 6.0f;
-
-			Console.WriteLine("=== Weapon simulation start ===");
-
-			while (simTime < maxSim)
 			{
 				Console.WriteLine($"\n--- t={simTime:F1}s ---");
 
@@ -101,16 +83,7 @@ public partial class Node2d : Node2D
 				{
 					weapons[0].Fire(airborneTarget); // missile again
 				}
-
-				// Update all weapons
-				foreach (var w in weapons)
-					w.Update(tick);
-
-				Thread.Sleep((int)(tick * 1000)); // slow down console output so you can read it
-				simTime += tick;
 			}
-
-			Console.WriteLine("\n=== Simulation end ===");
 		}
 	}
 }

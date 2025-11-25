@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using Godot; // Only needed if you actually want Godot Vector2; else replace with custom struct
 
-{{}}public partial class Lasers : Node2D{}
 public partial class Lasers : Node2D
 {
-    // class content
+	// class content
 }
 
 //Weapons for the aircraft
@@ -62,5 +61,9 @@ namespace WeaponDemo
 			if (timeUntilReady > 0f)
 				timeUntilReady -= deltaTime;
 		}
+
+	public async void getNode(Node2D Collisionbody2D)
+	{
+		GD.Print("eee");
 	}
 }
