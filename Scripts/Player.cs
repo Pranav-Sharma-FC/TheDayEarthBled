@@ -119,10 +119,19 @@ public partial class Player : Entity
 	private void AimWeapons()
 	{
 		if (!GodotObject.IsInstanceValid(enemy))
-			return
-				;
-		Vector2 targetPos = enemy.GlobalPosition;
-		rayCast.LookAt(targetPos);
+		{
+			rayCast.RotationDegrees = 180;
+		}
+		else
+		{
+			Vector2 targetPos = enemy.GlobalPosition;
+			rayCast.LookAt(targetPos);
+			if (rayCast.IsColliding())
+			{
+				Enemy enemys = (Enemy)enemy;
+				enemys.TakeDamage(Damage);
+			}
+		}
 	}
-
 }
+

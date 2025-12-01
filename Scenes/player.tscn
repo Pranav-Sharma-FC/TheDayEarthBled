@@ -1,10 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfoi8biflsrk3"]
+[gd_scene load_steps=5 format=3 uid="uid://cfoi8biflsrk3"]
 
 [ext_resource type="Script" uid="uid://drmp7l3pvqext" path="res://Scripts/Player.cs" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="2_6t5aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
 size = Vector2(135, 238)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cvnsp"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+inherit_velocity_ratio = 0.665
+spread = 180.0
+flatness = 0.8
+angular_velocity_min = 115.87
+angular_velocity_max = 115.87
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 1000.0
+gravity = Vector3(0, 98, 0)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("rayCast")]
 motion_mode = 1
@@ -33,12 +48,39 @@ shape = SubResource("RectangleShape2D_bo1nx")
 
 [node name="StraightFiring" type="RayCast2D" parent="."]
 target_position = Vector2(500, 0)
-collision_mask = 2
+collision_mask = 8
 collide_with_areas = true
 
 [node name="ColorRect" type="ColorRect" parent="StraightFiring"]
+visible = false
 offset_left = 2.0
 offset_top = -15.0
 offset_right = 607.0
+
+[node name="ExampleSprite" type="Sprite2D" parent="StraightFiring"]
+position = Vector2(310, -7)
+scale = Vector2(3.45313, -0.293945)
+texture = ExtResource("2_6t5aa")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 100
+sub_emitter = NodePath(".")
+texture = ExtResource("2_6t5aa")
+lifetime = 5.3
+speed_scale = 21.36
+explosiveness = 0.13
+trail_lifetime = 3.65
+process_material = SubResource("ParticleProcessMaterial_cvnsp")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+skew = -0.380482
+amount = 1000
+sub_emitter = NodePath(".")
+texture = ExtResource("2_6t5aa")
+lifetime = 5.3
+speed_scale = 21.36
+explosiveness = 0.13
+trail_lifetime = 3.65
+process_material = SubResource("ParticleProcessMaterial_cvnsp")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
