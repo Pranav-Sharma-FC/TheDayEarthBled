@@ -55,8 +55,9 @@ rotation = 0.0349066
 shape = SubResource("RectangleShape2D_0e48y")
 
 [node name="target" type="Area2D" parent="."]
-position = Vector2(425, 0)
+position = Vector2(214, 0)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="target"]
+position = Vector2(-1.086e-05, -3)
 shape = SubResource("RectangleShape2D_epypp")
