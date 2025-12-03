@@ -3,8 +3,13 @@ using System;
 
 public partial class Gamemanager : Node2D
 {
+	[Export] private  CharacterBody2D mainPlayer;
 	[Export] private PackedScene _player;
 	[Export] private Node2D _players;
+	[Export] private Node2D _enemies;
+	[Export] private PackedScene _enemyScene;
+	private bool _isReloadTime = true;
+	private int _reloadInt;
 	public override void _Ready()
 	{
 		for (int i = (Input.GetConnectedJoypads().Count); i > 0; i--)
@@ -20,7 +25,31 @@ public partial class Gamemanager : Node2D
 		base._Process(delta);
 		if (Input.IsActionJustPressed("escape_debug"))
 			GetTree().Quit();
+		if (_isReloadTime)
+		{
+			_isReloadTime = false;
+			spawnEnemy();
+		}
 	}
+
+	private async void spawnEnemy()
+	{
+		Enemy enemy = _enemyScene.Instantiate<Enemy>();
+		_enemies.AddChild(enemy);
+		enemy.player = mainPlayer;
+		enemy.Position = GetRandomSpawnPosition();
+		await ToSignal(GetTree().CreateTimer(1.0), "timeout");
+		_isReloadTime = true;
+	}
+	
+	private Vector2 GetRandomSpawnPosition()
+	{
+		float x = (float)GD.RandRange(0, -1920);
+		float y = (float)GD.RandRange(0, -1080);
+
+		return new Vector2(x, y);
+	}
+
 	
 	/*public override void _Input(InputEvent @event)
 	{

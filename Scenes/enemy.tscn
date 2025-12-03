@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxx0l448l3pxh"]
+[gd_scene load_steps=5 format=3 uid="uid://bxx0l448l3pxh"]
 
 [ext_resource type="Script" uid="uid://cfktctpvw5vfm" path="res://Scripts/Enemy.cs" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="2_afpow"]
@@ -6,9 +6,27 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
 size = Vector2(135, 238)
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1f0kj"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+inherit_velocity_ratio = 0.665
+spread = 180.0
+flatness = 0.8
+angular_velocity_min = 115.87
+angular_velocity_max = 115.87
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 1000.0
+gravity = Vector3(0, 98, 0)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("rayCast")]
 collision_layer = 8
 script = ExtResource("1_1f0kj")
+rayCast = NodePath("StraightFiring")
+_acceleration = 40.0
+_friction = 900.0
 Damage = 50
 
 [node name="ExampleSprite" type="Sprite2D" parent="."]
@@ -30,3 +48,30 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(57.5, -109)
 shape = SubResource("RectangleShape2D_287tu")
+
+[node name="StraightFiring" type="RayCast2D" parent="."]
+target_position = Vector2(500, 0)
+collision_mask = 4
+collide_with_areas = true
+
+[node name="ColorRect" type="ColorRect" parent="StraightFiring"]
+visible = false
+offset_left = 2.0
+offset_top = -15.0
+offset_right = 607.0
+
+[node name="ExampleSprite" type="Sprite2D" parent="StraightFiring"]
+position = Vector2(310, -7)
+scale = Vector2(3.45313, -0.293945)
+texture = ExtResource("2_afpow")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+sub_emitter = NodePath(".")
+texture = ExtResource("2_afpow")
+lifetime = 5.3
+speed_scale = 21.36
+explosiveness = 0.13
+trail_lifetime = 3.65
+process_material = SubResource("ParticleProcessMaterial_1f0kj")

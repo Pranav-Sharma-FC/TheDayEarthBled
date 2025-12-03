@@ -63,18 +63,8 @@ scale = Vector2(3.45313, -0.293945)
 texture = ExtResource("2_6t5aa")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
 amount = 100
-sub_emitter = NodePath(".")
-texture = ExtResource("2_6t5aa")
-lifetime = 5.3
-speed_scale = 21.36
-explosiveness = 0.13
-trail_lifetime = 3.65
-process_material = SubResource("ParticleProcessMaterial_cvnsp")
-
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
-skew = -0.380482
-amount = 1000
 sub_emitter = NodePath(".")
 texture = ExtResource("2_6t5aa")
 lifetime = 5.3

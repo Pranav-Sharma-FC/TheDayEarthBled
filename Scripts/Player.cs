@@ -7,6 +7,7 @@ public partial class Player : Entity
 	[Export] public int DeviceId = 0;
 	[Export] public bool player2; //Temporary bool
 	[Export] private CharacterBody2D enemy;
+	[Export] private Node2D _enemies;
 	[Export] private RayCast2D rayCast;
 	public bool OutOfCameraRange;
 	private Vector2 _velocity = Vector2.Zero;
@@ -47,7 +48,6 @@ public partial class Player : Entity
 			if (Input.IsActionPressed("thrust_down"))
 				input.Y += 1;
 
-			GD.Print(Input.IsActionPressed("thrust_down"));
 			Velocity = Vector2.Zero;
 			input = input.Normalized();
 
@@ -59,11 +59,34 @@ public partial class Player : Entity
 			if (_velocity.Length() > _maxSpeed)
 				_velocity = _velocity.Normalized() * _maxSpeed;
 
-			GD.Print(Velocity, _velocity);
 			Velocity = new Vector2(_velocity.X, _velocity.Y);
 			MoveAndSlide();
 		}
 	}
+	
+	public CharacterBody2D GetClosestPlayer()
+	{
+		Vector2 fromPosition = this.GlobalPosition;
+		CharacterBody2D closest = null;
+		float closestDist = float.MaxValue;
+		if (_enemies.GetChildCount() == 0)
+			return null;
+		foreach (CharacterBody2D child in _enemies.GetChildren())
+		{
+			if (child is Enemy enemys)
+			{
+				float dist = fromPosition.DistanceTo(enemys.GlobalPosition);
+				if (dist < closestDist)
+				{
+					closestDist = dist;
+					closest = enemys;
+				}
+			}
+		}
+
+		return closest;
+	}
+
 
 	protected override void MoveCharacter(double delta)
 	{
@@ -121,6 +144,7 @@ public partial class Player : Entity
 		if (!GodotObject.IsInstanceValid(enemy))
 		{
 			rayCast.RotationDegrees = 180;
+			enemy = GetClosestPlayer();
 		}
 		else
 		{
