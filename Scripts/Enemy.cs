@@ -6,6 +6,7 @@ public partial class Enemy : Entity
 {
     [Export] private RayCast2D rayCast;
     [Export] public CharacterBody2D player;
+    [Export] public Node2D _players;
     public override void _PhysicsProcess(double delta)
     {
         if (Health <= 0)
@@ -81,7 +82,7 @@ public partial class Enemy : Entity
         if (!GodotObject.IsInstanceValid(player))
         {
             rayCast.RotationDegrees = 180;
-            GD.Print("eeeee");
+            player = GetClosestPlayer();
         }
         else
         {
@@ -95,5 +96,28 @@ public partial class Enemy : Entity
                 enemys.TakeDamage(Damage);
             }
         }
+    }
+    
+    public CharacterBody2D GetClosestPlayer()
+    {
+        Vector2 fromPosition = this.GlobalPosition;
+        CharacterBody2D closest = null;
+        float closestDist = float.MaxValue;
+        if (_players.GetChildCount() == 0)
+            return null;
+        foreach (CharacterBody2D child in _players.GetChildren())
+        {
+            if (child is Player players)
+            {
+                float dist = fromPosition.DistanceTo(players.GlobalPosition);
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    closest = players;
+                }
+            }
+        }
+
+        return closest;
     }
 }

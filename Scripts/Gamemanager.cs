@@ -37,6 +37,7 @@ public partial class Gamemanager : Node2D
 		Enemy enemy = _enemyScene.Instantiate<Enemy>();
 		_enemies.AddChild(enemy);
 		enemy.player = mainPlayer;
+		enemy._players = _players;
 		enemy.Position = GetRandomSpawnPosition();
 		await ToSignal(GetTree().CreateTimer(1.0), "timeout");
 		_isReloadTime = true;
@@ -44,8 +45,8 @@ public partial class Gamemanager : Node2D
 	
 	private Vector2 GetRandomSpawnPosition()
 	{
-		float x = (float)GD.RandRange(0, -1920);
-		float y = (float)GD.RandRange(0, -1080);
+		float x = (float)GD.RandRange(1920, -1920-1920);
+		float y = (float)GD.RandRange(1920, -1920-1920);
 
 		return new Vector2(x, y);
 	}
