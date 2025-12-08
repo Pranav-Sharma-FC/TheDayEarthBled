@@ -7,6 +7,7 @@ public partial class Gamemanager : Node2D
 	[Export] private PackedScene _player;
 	[Export] private Node2D _players;
 	[Export] private Node2D _enemies;
+	[Export] private Node2D _entities;
 	[Export] private PackedScene _enemyScene;
 	private bool _isReloadTime = true;
 	private int _reloadInt;
@@ -32,12 +33,18 @@ public partial class Gamemanager : Node2D
 		}
 	}
 
+	public void SendText(String text)
+	{
+		
+	}
+
 	private async void spawnEnemy()
 	{
 		Enemy enemy = _enemyScene.Instantiate<Enemy>();
 		_enemies.AddChild(enemy);
 		enemy.player = mainPlayer;
 		enemy._players = _players;
+		enemy.BulletTree = _entities;
 		enemy.Position = GetRandomSpawnPosition();
 		await ToSignal(GetTree().CreateTimer(1.0), "timeout");
 		_isReloadTime = true;
@@ -45,7 +52,7 @@ public partial class Gamemanager : Node2D
 	
 	private Vector2 GetRandomSpawnPosition()
 	{
-		float x = (float)GD.RandRange(1920, -1920-1920);
+		float x = (float)GD.RandRange(-1920, -1920-1920);
 		float y = (float)GD.RandRange(1920, -1920-1920);
 
 		return new Vector2(x, y);

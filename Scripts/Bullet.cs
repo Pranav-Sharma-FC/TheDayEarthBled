@@ -4,13 +4,18 @@ using Godot.Collections;
 
 public partial class Bullet : Entity
 {
-	private Vector2 direction;
+	[Export] private bool _allied;
+	public Vector2 Direction;
 
 	public override void _Ready()
 	{
-		Vector2 mousePos = GetGlobalMousePosition();
-		direction = (mousePos - this.GlobalPosition).Normalized();
-		Velocity = direction * _maxSpeed;
+		if (_allied)
+		{
+			Vector2 mousePos = GetGlobalMousePosition();
+			Direction = (mousePos - this.GlobalPosition).Normalized();
+		}
+
+		Velocity = Direction * _maxSpeed;
 		Fire();
 	}
 
@@ -54,12 +59,19 @@ public partial class Bullet : Entity
 	}
 	
 	public void OnBodyEntered(Node2D body)
-	{
-		if (body is Enemy)
+	{ 
+		if ((body is Enemy) && _allied)
 		{
 			GD.Print("Fish?");
 			Enemy enemys = (Enemy)body;
 			enemys.TakeDamage(this.Damage);
+			this.Death();
+		}
+		else if ((body is Player) && !_allied)
+		{
+			GD.Print("Fish?");
+			Player players = (Player)body;
+			players.TakeDamage(this.Damage);
 			this.Death();
 		}
 	}

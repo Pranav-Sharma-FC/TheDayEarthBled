@@ -7,6 +7,11 @@ public partial class Enemy : Entity
 	[Export] private RayCast2D rayCast;
 	[Export] public CharacterBody2D player;
 	[Export] public Node2D _players;
+	private bool _isReloadTime = true;
+	[Export] private PackedScene _bullets;
+	[Export] private Node2D _bulletSpawn;
+	public Node2D BulletTree;
+
 	public override void _PhysicsProcess(double delta)
 	{
 		if (Health <= 0)
@@ -15,6 +20,8 @@ public partial class Enemy : Entity
 		}
 		GD.Print(Health + "HHHHHHHHHHHHHHHHHHHH");
 		AimLaser();
+		if (_isReloadTime)
+			Fire();
 		player = GetClosestPlayer();
 		MoveCharacter(delta);
 	}
@@ -48,11 +55,6 @@ public partial class Enemy : Entity
 		GD.Print("throw new NotImplementedException();");
 	}
 
-	protected override void Fire()
-	{
-		GD.Print("throw new NotImplementedException();");
-	}
-
 	public override Dictionary GetStats()
 	{
 		GD.Print("throw new NotImplementedException();");
@@ -77,11 +79,27 @@ public partial class Enemy : Entity
 		
 	}
 	
+	protected async override void Fire()
+	{
+		_isReloadTime = false;
+		Bullet bull = _bullets.Instantiate<Bullet>();
+		Vector2 randomOffset = new Vector2(
+			GD.RandRange(-50, 50),
+			GD.RandRange(-50, 50)
+		);
+		bull.Position = _bulletSpawn.GlobalPosition + randomOffset;
+		Vector2 mousePos = player.GlobalPosition;
+		bull.Direction = (mousePos - this.GlobalPosition).Normalized();
+		BulletTree.AddChild(bull);
+		await ToSignal(GetTree().CreateTimer(1), "timeout");
+		_isReloadTime = true;
+	}
+	
 	
 	
 	private void AimLaser()
 	{
-		if (!GodotObject.IsInstanceValid(player))
+		if (player == null)
 		{
 			rayCast.RotationDegrees = 180;
 			player = GetClosestPlayer();
@@ -99,7 +117,6 @@ public partial class Enemy : Entity
 					GD.Print("eadadfadfd");
 					player.TakeDamage(Damage);
 				}
-				
 			}
 		}
 	}
