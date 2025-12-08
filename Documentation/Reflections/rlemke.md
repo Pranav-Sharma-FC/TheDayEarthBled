@@ -15,4 +15,3 @@ Making sure the .gitignore caught everything was a pain since we're using new to
 
 
 ## Sprint 3
-
