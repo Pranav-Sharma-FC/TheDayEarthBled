@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cxdqpqrepqf4j" path="res://Scripts/Gamemanager.cs" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cfoi8biflsrk3" path="res://Scenes/player.tscn" id="1_bo1nx"]
-[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://vadyegrxq2m7" path="res://Scripts/PlayerManager.cs" id="3_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bxx0l448l3pxh" path="res://Scenes/enemy.tscn" id="4_21xkr"]
 [ext_resource type="Script" uid="uid://c86qb7qvl7j10" path="res://Scripts/Camera.cs" id="4_jjvhh"]
@@ -67,9 +67,8 @@ tile_size = Vector2i(160, 160)
 sources/0 = SubResource("TileSetAtlasSource_bo1nx")
 sources/1 = SubResource("TileSetAtlasSource_8gbba")
 
-[node name="GameManager" type="Node2D" node_paths=PackedStringArray("mainPlayer", "_players", "_enemies")]
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("_players", "_enemies")]
 script = ExtResource("1_8gbba")
-mainPlayer = NodePath("")
 _player = ExtResource("1_bo1nx")
 _players = NodePath("Players")
 _enemies = NodePath("Entities/Enemy")
@@ -80,21 +79,25 @@ script = ExtResource("3_6bp64")
 
 [node name="FunTime" parent="Players" node_paths=PackedStringArray("_enemies", "_bulletTree") instance=ExtResource("1_bo1nx")]
 position = Vector2(1034, -409)
+Player2 = true
 _enemies = NodePath("../../Entities/Enemy")
 _bulletTree = NodePath("../../Entities")
 
 [node name="FunTime2" parent="Players" node_paths=PackedStringArray("_enemies", "_bulletTree") instance=ExtResource("1_bo1nx")]
 position = Vector2(-1061, -395)
+Player2 = true
 _enemies = NodePath("../../Entities/Enemy")
 _bulletTree = NodePath("../../Entities")
 
 [node name="CameraTest" parent="Players" node_paths=PackedStringArray("_enemies", "_bulletTree") instance=ExtResource("1_bo1nx")]
 position = Vector2(225, 132)
+Player2 = true
 _enemies = NodePath("../../Entities/Enemy")
 _bulletTree = NodePath("../../Entities")
 
 [node name="CameraTest2" parent="Players" node_paths=PackedStringArray("_enemies", "_bulletTree") instance=ExtResource("1_bo1nx")]
 position = Vector2(-552, 223)
+Player2 = true
 _enemies = NodePath("../../Entities/Enemy")
 _bulletTree = NodePath("../../Entities")
 
@@ -115,7 +118,7 @@ script = ExtResource("4_jjvhh")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Viewport" parent="CanvasLayer" node_paths=PackedStringArray("Player1", "Player2", "Player3", "Player4") instance=ExtResource("5_kry3j")]
-Player1 = NodePath("")
+Player1 = NodePath("../../Players/CameraTest2")
 Player2 = NodePath("../../Players/FunTime")
 Player3 = NodePath("../../Players/FunTime2")
 Player4 = NodePath("../../Players/CameraTest")

@@ -116,6 +116,7 @@ public partial class Player : Entity
 
 	protected async override void Fire()
 	{
+		_isReloadTime = false;
 		Bullet bull = _bullets.Instantiate<Bullet>();
 		Vector2 randomOffset = new Vector2(
 			GD.RandRange(-50, 50),
@@ -124,7 +125,7 @@ public partial class Player : Entity
 
 		bull.Position = _bulletSpawn.GlobalPosition + randomOffset;
 		_bulletTree.AddChild(bull);
-		await ToSignal(GetTree().CreateTimer(1.0), "timeout");
+		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
 		_isReloadTime = true;
 	}
 
@@ -173,4 +174,3 @@ public partial class Player : Entity
 		}
 	}
 }
-

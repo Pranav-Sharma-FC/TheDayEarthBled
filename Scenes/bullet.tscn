@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://h474lbldsbxh"]
 
 [ext_resource type="Script" uid="uid://bjuilbbworkj0" path="res://Scripts/Bullet.cs" id="1_oduel"]
-[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_xjght"]
+[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="1_xjght"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mw4s"]
 
@@ -21,11 +21,12 @@ animations = [{
 }]
 
 [node name="Bullet" type="CharacterBody2D"]
-collision_layer = 16
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_oduel")
 _friction = 10.0
-_maxSpeed = 4800.0
+_maxSpeed = 500.0
+Damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4mw4s")
@@ -34,3 +35,12 @@ shape = SubResource("RectangleShape2D_4mw4s")
 modulate = Color(1, 0.643137, 0, 1)
 position = Vector2(2, -6)
 sprite_frames = SubResource("SpriteFrames_ycag2")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_4mw4s")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
