@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://4gx7i1v2kyp1"]
+
+[ext_resource type="Script" uid="uid://cou5hd6sslpp0" path="res://Dialogue/dialogueScript/TutorialDialogueBox.cs" id="1_smrcf"]
+
+[node name="tutorialDialogueBox" type="RichTextLabel"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_smrcf")
