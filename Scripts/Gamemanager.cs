@@ -3,6 +3,7 @@ using System;
 
 public partial class Gamemanager : Node2D
 {
+	[Signal] public delegate void GameIsOverEventHandler();
 	[Export] private  CharacterBody2D mainPlayer;
 	[Export] private PackedScene _player;
 	[Export] private Node2D _players;
@@ -13,12 +14,7 @@ public partial class Gamemanager : Node2D
 	private int _reloadInt;
 	public override void _Ready()
 	{
-		for (int i = (Input.GetConnectedJoypads().Count); i > 0; i--)
-		{
-			Player player = _player.Instantiate() as Player;
-			_players.AddChild(player);
-			player.DeviceId = i;
-		}
+		GD.Print("Cool");
 	}
 
 	public override void _Process(double delta)
@@ -30,6 +26,10 @@ public partial class Gamemanager : Node2D
 		{
 			_isReloadTime = false;
 			spawnEnemy();
+		}
+		if (_players.GetChildCount() == 0)
+		{
+			EmitSignal(SignalName.GameIsOver);
 		}
 	}
 

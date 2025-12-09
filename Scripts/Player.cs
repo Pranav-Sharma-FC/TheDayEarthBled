@@ -2,8 +2,18 @@ using Godot;
 using Godot.Collections;
 using System;
 
+
+
 public partial class Player : Entity
 {
+	//Enum
+	public enum BulletFireMode
+	{
+		Single,
+		Burst,
+		Auto
+	}
+	[Export] public BulletFireMode currentBullet = BulletFireMode.Single;
 	[Export] public int DeviceId = 0;
 	[Export] public bool Player2; //Temporary bool
 	[Export] private CharacterBody2D _enemy;
@@ -15,7 +25,7 @@ public partial class Player : Entity
 	private bool _outOfCameraRange;
 	private Vector2 _velocity = Vector2.Zero;
 	private bool _activeThisFrame = true; // Only true if this player's device had input this frame
-	private bool _isReloadTime = true;
+	private bool _isBulletReloadTime = true;
 
 	// Called by GameManager
 	/*public override void _Input(InputEvent @event)
@@ -31,6 +41,10 @@ public partial class Player : Entity
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (isShield)
+		{
+			RegenSheilds();
+		}
 		AimWeapons();
 		if (Health <= 0)
 		{
@@ -45,14 +59,17 @@ public partial class Player : Entity
 			Vector2 input = Vector2.Zero;
 			if (Input.IsActionPressed("thrust_left"))
 				input.X -= 1;
-			if (Input.IsActionPressed("thrust_right") && Player2)
+			else if (Input.IsActionPressed("thrust_right") && Player2)
 				input.X += 1;
 			if (Input.IsActionPressed("thrust_up"))
 				input.Y -= 1;
-			if (Input.IsActionPressed("thrust_down"))
+			else if (Input.IsActionPressed("thrust_down"))
 				input.Y += 1;
-			if (Input.IsActionPressed("shoot") & _isReloadTime)
+			if (Input.IsActionPressed("shoot") & _isBulletReloadTime)
 				Fire();
+			if (Input.IsActionPressed("shoot") & _isBulletReloadTime)
+				Fire();
+			
 
 			Velocity = Vector2.Zero;
 			input = input.Normalized();
@@ -67,6 +84,7 @@ public partial class Player : Entity
 
 			Velocity = new Vector2(_velocity.X, _velocity.Y);
 			MoveAndSlide();
+			_enemy = GetClosestPlayer();
 		}
 	}
 	
@@ -103,20 +121,22 @@ public partial class Player : Entity
 	}
 	public override void TakeDamage(int enemysDamage)
 	{
-		Health -= enemysDamage;
+		Sheilds -= enemysDamage;
+		if (Sheilds < 0)
+		{
+			Health += Sheilds;
+			GD.Print("Health Debug" + Health);
+			Sheilds = 0;
+		}
 	}
 	protected override void SpecialEffects()
-	{
-		
-	}
-	protected override void HealthReload()
 	{
 		
 	}
 
 	protected async override void Fire()
 	{
-		_isReloadTime = false;
+		_isBulletReloadTime = false;
 		Bullet bull = _bullets.Instantiate<Bullet>();
 		Vector2 randomOffset = new Vector2(
 			GD.RandRange(-50, 50),
@@ -126,7 +146,7 @@ public partial class Player : Entity
 		bull.Position = _bulletSpawn.GlobalPosition + randomOffset;
 		_bulletTree.AddChild(bull);
 		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
-		_isReloadTime = true;
+		_isBulletReloadTime = true;
 	}
 
 	public override Dictionary GetStats()
@@ -168,8 +188,12 @@ public partial class Player : Entity
 			_rayCast.LookAt(targetPos);
 			if (_rayCast.IsColliding())
 			{
-				Enemy enemys = (Enemy)_enemy;
-				enemys.TakeDamage(Damage);
+				Node2D objectss = (Node2D) _rayCast.GetCollider();
+				if (objectss.GetParent() is Enemy enemy) 
+				{
+					GD.Print("eadadfadfd");
+					enemy.TakeDamage(Damage);
+				}
 			}
 		}
 	}

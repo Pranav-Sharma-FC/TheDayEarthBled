@@ -4,6 +4,7 @@ using Godot.Collections;
 
 public partial class Enemy : Entity
 {
+	
 	[Export] private RayCast2D rayCast;
 	[Export] public CharacterBody2D player;
 	[Export] public Node2D _players;
@@ -11,9 +12,17 @@ public partial class Enemy : Entity
 	[Export] private PackedScene _bullets;
 	[Export] private Node2D _bulletSpawn;
 	public Node2D BulletTree;
-
+	public override void _Ready()
+	{
+		
+	}
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!GodotObject.IsInstanceValid(player) || player == null)
+		{
+			player = GetClosestPlayer();
+			return;
+		}
 		if (Health <= 0)
 		{
 			Death();
@@ -50,11 +59,6 @@ public partial class Enemy : Entity
 		GD.Print("throw new NotImplementedException();");
 	}
 
-	protected override void HealthReload()
-	{
-		GD.Print("throw new NotImplementedException();");
-	}
-
 	public override Dictionary GetStats()
 	{
 		GD.Print("throw new NotImplementedException();");
@@ -73,7 +77,6 @@ public partial class Enemy : Entity
 		if (body is Player)
 		{
 			Player enemys = (Player)body;
-			TakeDamage(enemys.Damage);
 			enemys.TakeDamage(Damage);
 		}
 		
@@ -99,7 +102,7 @@ public partial class Enemy : Entity
 	
 	private void AimLaser()
 	{
-		if (player == null)
+		if (!GodotObject.IsInstanceValid(player) || player == null)
 		{
 			rayCast.RotationDegrees = 180;
 			player = GetClosestPlayer();

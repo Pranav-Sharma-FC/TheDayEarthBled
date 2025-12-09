@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://duamlumy8sjd1"]
 
 [ext_resource type="Script" uid="uid://bjuilbbworkj0" path="res://Scripts/Bullet.cs" id="1_0y01j"]
-[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="2_yhite"]
+[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="2_yhite"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mw4s"]
 
@@ -38,7 +38,7 @@ sprite_frames = SubResource("SpriteFrames_ycag2")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 4
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_4mw4s")
