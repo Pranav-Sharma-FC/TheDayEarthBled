@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cfoi8biflsrk3"]
 
 [ext_resource type="Script" uid="uid://drmp7l3pvqext" path="res://Scripts/Player.cs" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="2_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://h474lbldsbxh" path="res://Scenes/bullet.tscn" id="2_vgqql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
@@ -22,7 +22,7 @@ gravity = Vector3(0, 98, 0)
 linear_accel_min = 100.0
 linear_accel_max = 100.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_rayCast", "_bulletSpawn")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_rayCast", "_bulletSpawn", "_portBullets", "_sternBullets", "_starboardBullets", "_portAimers", "_sternAimers", "_starboardAimers")]
 collision_layer = 129
 collision_mask = 129
 motion_mode = 1
@@ -30,7 +30,13 @@ wall_min_slide_angle = 0.74351
 script = ExtResource("1_cvnsp")
 _rayCast = NodePath("StraightFiring")
 _bullets = ExtResource("2_vgqql")
-_bulletSpawn = NodePath("Weapons1")
+_bulletSpawn = NodePath("")
+_portBullets = NodePath("Port")
+_sternBullets = NodePath("Stern")
+_starboardBullets = NodePath("Starboard")
+_portAimers = NodePath("Aimers/Port")
+_sternAimers = NodePath("Aimers/Stern")
+_starboardAimers = NodePath("Aimers/Starboard")
 _acceleration = 1000.0
 _friction = 5.0
 _maxSpeed = 1000.0
@@ -51,8 +57,9 @@ collision_mask = 8
 shape = SubResource("RectangleShape2D_bo1nx")
 
 [node name="StraightFiring" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(500, 0)
-collision_mask = 8
+collision_mask = 0
 collide_with_areas = true
 
 [node name="ColorRect" type="ColorRect" parent="StraightFiring"]
@@ -77,10 +84,51 @@ explosiveness = 0.13
 trail_lifetime = 3.65
 process_material = SubResource("ParticleProcessMaterial_cvnsp")
 
-[node name="Weapons1" type="Node2D" parent="."]
-position = Vector2(-56, -111)
+[node name="Stern" type="Node2D" parent="."]
+position = Vector2(-112, -222)
 
-[node name="Weapons2" type="Node2D" parent="."]
-position = Vector2(55, 112)
+[node name="One" type="Node2D" parent="Stern"]
+position = Vector2(69, 363)
+
+[node name="One2" type="Node2D" parent="Stern"]
+position = Vector2(113, 357)
+
+[node name="One3" type="Node2D" parent="Stern"]
+position = Vector2(155, 365)
+
+[node name="Starboard" type="Node2D" parent="."]
+position = Vector2(-112, -222)
+
+[node name="One" type="Node2D" parent="Starboard"]
+position = Vector2(249, 126)
+
+[node name="One2" type="Node2D" parent="Starboard"]
+position = Vector2(260, 206)
+
+[node name="One3" type="Node2D" parent="Starboard"]
+position = Vector2(260, 298)
+
+[node name="Port" type="Node2D" parent="."]
+position = Vector2(-112, -222)
+
+[node name="One" type="Node2D" parent="Port"]
+position = Vector2(3, 301)
+
+[node name="One2" type="Node2D" parent="Port"]
+position = Vector2(4, 243)
+
+[node name="One3" type="Node2D" parent="Port"]
+position = Vector2(-1, 137)
+
+[node name="Aimers" type="Node2D" parent="."]
+
+[node name="Stern" type="Node2D" parent="Aimers"]
+position = Vector2(0, 832)
+
+[node name="Port" type="Node2D" parent="Aimers"]
+position = Vector2(-1223, 0)
+
+[node name="Starboard" type="Node2D" parent="Aimers"]
+position = Vector2(1272, 0)
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

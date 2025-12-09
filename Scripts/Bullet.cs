@@ -5,20 +5,16 @@ using Godot.Collections;
 public partial class Bullet : Entity
 {
 	[Export] private bool _allied;
-	public Vector2 Direction;
-	public Entity target;
-	public static int regularDamage;
-
+	public Vector2 Direction = Vector2.Zero;
+	public Node2D target;
+	
 	public override void _Ready()
 	{
-		regularDamage = Damage;
-		if (_allied)
-		{
-			Vector2 mousePos = GetGlobalMousePosition();
-			Direction = (mousePos - this.GlobalPosition).Normalized();
-		}
-		
+		if (target != null || GodotObject.IsInstanceValid(target))
+			Direction = (target.GlobalPosition - this.GlobalPosition).Normalized();
+			GD.Print("Direction");
 		Velocity = Direction * _maxSpeed;
+		GD.Print(Velocity);
 		Fire();
 	}
 
@@ -27,28 +23,12 @@ public partial class Bullet : Entity
 		MoveCharacter(delta);
 		//if (Input.IsActionJustPressed("escape_debug"))
 		// 	Death();
+		MoveAndSlide();
 	}
 
 	protected override void MoveCharacter(double delta)
-	{
-		if(target == null || !(GodotObject.IsInstanceValid(target)))
-		{
-			Velocity = Velocity.MoveToward(Vector2.Zero, _friction * (float)delta);
-		}
-		else
-		{
-			Damage = regularDamage*2;
-			Vector2 direction = (target.GlobalPosition - this.GlobalPosition).Normalized();
-
-			// Accelerate in that direction
-			Velocity += direction * _maxSpeed * (float)delta;
-
-			// Clamp to max speed
-			if (Velocity.Length() > _maxSpeed)
-				Velocity = Velocity.Normalized() * _maxSpeed;
-
-		}
-		MoveAndSlide();	
+	{ 
+		Velocity = Velocity.MoveToward(Direction, _friction * (float)delta);
 	}
 
 	public override void TakeDamage(int damage)

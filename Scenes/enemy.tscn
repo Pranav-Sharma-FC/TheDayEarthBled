@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfktctpvw5vfm" path="res://Scripts/Enemy.cs" id="1_1f0kj"]
 [ext_resource type="PackedScene" uid="uid://duamlumy8sjd1" path="res://Scenes/enemybullet.tscn" id="2_287tu"]
-[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="2_afpow"]
+[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="2_afpow"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
 size = Vector2(135, 238)
@@ -54,8 +54,9 @@ position = Vector2(57.5, -109)
 shape = SubResource("RectangleShape2D_287tu")
 
 [node name="StraightFiring" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(500, 0)
-collision_mask = 4
+collision_mask = 0
 collide_with_areas = true
 
 [node name="ColorRect" type="ColorRect" parent="StraightFiring"]

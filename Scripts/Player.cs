@@ -22,10 +22,20 @@ public partial class Player : Entity
 	[Export] private PackedScene _bullets;
 	[Export] private Node2D _bulletSpawn;
 	[Export] private Node2D _bulletTree;
+	[Export] private Node2D _portBullets;
+	[Export] private Node2D _sternBullets;
+	[Export] private Node2D _starboardBullets;
+	[Export] private Node2D _portAimers;
+	[Export] private Node2D _sternAimers;
+	[Export] private Node2D _starboardAimers;
+	private Node2D _currentAimer;
 	private bool _outOfCameraRange;
 	private Vector2 _velocity = Vector2.Zero;
 	private bool _activeThisFrame = true; // Only true if this player's device had input this frame
 	private bool _isBulletReloadTime = true;
+	private bool _isPortReloadTime = true;
+	private bool _isStarboardReloadTime = true;
+	private bool _isSternReloadTime = true;
 
 	// Called by GameManager
 	/*public override void _Input(InputEvent @event)
@@ -65,10 +75,14 @@ public partial class Player : Entity
 				input.Y -= 1;
 			else if (Input.IsActionPressed("thrust_down"))
 				input.Y += 1;
-			if (Input.IsActionPressed("shoot") & _isBulletReloadTime)
-				Fire();
-			if (Input.IsActionPressed("shoot") & _isBulletReloadTime)
-				Fire();
+			if (Input.IsActionPressed("shoot"))
+				GD.Print(":laser");//Fire();
+			if (Input.IsActionPressed("shoot_port") & _isPortReloadTime)
+				FirePort();
+			if (Input.IsActionPressed("shoot_stern") & _isSternReloadTime)
+				FireStern();
+			if (Input.IsActionPressed("shoot_starboard") & _isStarboardReloadTime)
+				FireStarboard();
 			
 
 			Velocity = Vector2.Zero;
@@ -111,6 +125,48 @@ public partial class Player : Entity
 		return closest;
 	}
 
+	private async void FireStern()
+	{
+		_isSternReloadTime = false;
+		foreach (Node2D stern in _sternBullets.GetChildren())
+		{
+			_bulletSpawn = stern;
+			_currentAimer = _sternAimers;
+			Fire();
+			await ToSignal(GetTree().CreateTimer(0.15), "timeout");
+		}
+		await ToSignal(GetTree().CreateTimer(0.75), "timeout");
+		_isSternReloadTime = true;
+	}
+	
+	private async void FireStarboard()
+	{
+		_isStarboardReloadTime = false;
+		foreach (Node2D sb in _starboardBullets.GetChildren())
+		{
+			_bulletSpawn = sb;
+			_currentAimer = _starboardAimers;
+			Fire();
+			await ToSignal(GetTree().CreateTimer(0.15), "timeout");
+		}
+		await ToSignal(GetTree().CreateTimer(0.75), "timeout");
+		_isStarboardReloadTime = true;
+	}
+	
+	private async void FirePort()
+	{
+		_isPortReloadTime = false;
+		foreach (Node2D port in _portBullets.GetChildren())
+		{
+			_bulletSpawn = port;
+			_currentAimer = _portAimers;
+			Fire();
+			await ToSignal(GetTree().CreateTimer(0.15), "timeout");
+		}
+		await ToSignal(GetTree().CreateTimer(0.75), "timeout");
+		_isPortReloadTime = true;
+	}
+
 
 	protected override void MoveCharacter(double delta)
 	{
@@ -134,7 +190,7 @@ public partial class Player : Entity
 		
 	}
 
-	protected async override void Fire()
+	protected override void Fire()
 	{
 		_isBulletReloadTime = false;
 		Bullet bull = _bullets.Instantiate<Bullet>();
@@ -142,11 +198,9 @@ public partial class Player : Entity
 			GD.RandRange(-50, 50),
 			GD.RandRange(-50, 50)
 		);
-
+		bull.target = _currentAimer;
 		bull.Position = _bulletSpawn.GlobalPosition + randomOffset;
 		_bulletTree.AddChild(bull);
-		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
-		_isBulletReloadTime = true;
 	}
 
 	public override Dictionary GetStats()
