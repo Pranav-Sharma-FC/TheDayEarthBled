@@ -45,6 +45,7 @@ public partial class Gamemanager : Node2D
 		enemy.player = mainPlayer;
 		enemy._players = _players;
 		enemy.BulletTree = _entities;
+		GD.Print("Pleasewridx");
 		enemy.Position = GetRandomSpawnPosition();
 		await ToSignal(GetTree().CreateTimer(1.0), "timeout");
 		_isReloadTime = true;
