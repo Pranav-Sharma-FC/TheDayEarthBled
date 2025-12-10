@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=4 uid="uid://d2dupnj8vilps"]
+[gd_scene load_steps=15 format=4 uid="uid://d2dupnj8vilps"]
 
 [ext_resource type="Script" uid="uid://cxdqpqrepqf4j" path="res://Scripts/Gamemanager.cs" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cfoi8biflsrk3" path="res://Scenes/player.tscn" id="1_bo1nx"]
-[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bxx0l448l3pxh" path="res://Scenes/enemy.tscn" id="4_21xkr"]
 [ext_resource type="Script" uid="uid://c86qb7qvl7j10" path="res://Scripts/Camera.cs" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cihxmmj35s8b0" path="res://Scenes/UI.tscn" id="5_kry3j"]
+[ext_resource type="Script" uid="uid://dxlr7cm7druoo" path="res://Scripts/PauseMenu.cs" id="7_6bp64"]
+[ext_resource type="Texture2D" uid="uid://ocqr4kaowgws" path="res://icon.svg" id="8_344ge"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_21xkr"]
 script/source = "using Godot;
@@ -93,13 +95,10 @@ _enemyScene = ExtResource("4_21xkr")
 script = SubResource("CSharpScript_21xkr")
 
 [node name="FunTime" parent="Players" node_paths=PackedStringArray("_enemies", "_bulletTree") instance=ExtResource("1_bo1nx")]
-position = Vector2(1034, -409)
-Player2 = true
 _enemies = NodePath("../../Entities/Enemy")
 _bulletTree = NodePath("../../Entities")
 
 [node name="Camera" type="Camera2D" parent="Players/FunTime"]
-position = Vector2(-1034, 409)
 zoom = Vector2(0.25, 0.25)
 script = ExtResource("4_jjvhh")
 
@@ -139,7 +138,23 @@ shape = SubResource("RectangleShape2D_344ge")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Viewport" parent="CanvasLayer" node_paths=PackedStringArray("Player2") instance=ExtResource("5_kry3j")]
-Player2 = NodePath("../../Players/FunTime")
+[node name="Viewport" parent="CanvasLayer" node_paths=PackedStringArray("Player1Control", "player") instance=ExtResource("5_kry3j")]
+Player1Control = NodePath("topRight")
+player = NodePath("../../Players/FunTime")
 
-[editable path="CanvasLayer/Viewport"]
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_6bp64")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PauseMenu"]
+self_modulate = Color(1, 1, 1, 0.556863)
+offset_left = -3982.0
+offset_top = -2681.0
+offset_right = 4383.0
+offset_bottom = 2748.0
+texture = ExtResource("8_344ge")
+expand_mode = 1

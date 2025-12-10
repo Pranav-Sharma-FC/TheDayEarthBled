@@ -7,15 +7,24 @@ using System;
 public partial class Player : Entity
 {
 	//Enum
-	public enum BulletFireMode
+	public enum PortFireMode
 	{
 		Single,
 		Burst,
 		Auto
 	}
-	[Export] public BulletFireMode currentBullet = BulletFireMode.Single;
-	[Export] public int DeviceId = 0;
-	[Export] public bool Player2; //Temporary bool
+	public enum SternFireMode
+	{
+		Single,
+		Burst,
+		Auto
+	}
+	public enum StarboardFireMode
+	{
+		Single,
+		Burst,
+		Auto
+	}
 	[Export] private CharacterBody2D _enemy;
 	[Export] private Node2D _enemies;
 	[Export] private RayCast2D _rayCast;
@@ -69,7 +78,7 @@ public partial class Player : Entity
 			Vector2 input = Vector2.Zero;
 			if (Input.IsActionPressed("thrust_left"))
 				input.X -= 1;
-			else if (Input.IsActionPressed("thrust_right") && Player2)
+			else if (Input.IsActionPressed("thrust_right"))
 				input.X += 1;
 			if (Input.IsActionPressed("thrust_up"))
 				input.Y -= 1;
@@ -95,10 +104,16 @@ public partial class Player : Entity
 
 			if (_velocity.Length() > _maxSpeed)
 				_velocity = _velocity.Normalized() * _maxSpeed;
+			
 
 			Velocity = new Vector2(_velocity.X, _velocity.Y);
 			MoveAndSlide();
+			
 			_enemy = GetClosestPlayer();
+		}
+		if(Velocity.Length() > 0.01f)
+		{
+			Rotation = (Velocity.Angle() + Mathf.Pi/2f);
 		}
 	}
 	
@@ -133,9 +148,9 @@ public partial class Player : Entity
 			_bulletSpawn = stern;
 			_currentAimer = _sternAimers;
 			Fire();
-			await ToSignal(GetTree().CreateTimer(0.15), "timeout");
+			await ToSignal(GetTree().CreateTimer(0.05), "timeout");
 		}
-		await ToSignal(GetTree().CreateTimer(0.75), "timeout");
+		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
 		_isSternReloadTime = true;
 	}
 	

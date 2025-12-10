@@ -38,7 +38,7 @@ public partial class Enemy : Entity
 	protected override void MoveCharacter(double delta)
 	{
 		Vector2 direction = (player.GlobalPosition - this.GlobalPosition).Normalized();
-
+		direction *= new Vector2(1, 0.2f);
 		// Accelerate in that direction
 		Velocity += direction * _maxSpeed * (float)delta;
 

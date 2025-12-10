@@ -22,7 +22,7 @@ public partial class Gamemanager : Node2D
 		base._Process(delta);
 		if (Input.IsActionJustPressed("escape_debug"))
 			GetTree().Quit();
-		if (_isReloadTime)
+		if (_isReloadTime && _enemies.GetChildCount() <= 20)
 		{
 			_isReloadTime = false;
 			spawnEnemy();
