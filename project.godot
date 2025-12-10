@@ -25,7 +25,7 @@ directories/dch_directory={
 "unit_test_character": "res://Tests/Resources/unit_test_character.dch"
 }
 directories/dtl_directory={
-"timeline": "res://Dialogue/deletedLaterTimeline.dtl"
+"deletedLaterTimeline": "res://Dialogue/deletedLaterTimeline.dtl"
 }
 layout/style_directory={}
 
@@ -72,7 +72,7 @@ dialogic_default_action={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://midgame \'echos of the darkened sun\'.dialogue", "res://Dialogue/dialogueFiles/final level.dialogue", "res://Dialogue/dialogueFiles/midgame \'echos of the darkened sun\'.dialogue", "res://Dialogue/dialogueFiles/New Dialogue.dialogue", "res://Dialogue/dialogueFiles/tutorial dialogue.dialogue", "res://Dialogue/dialogueFiles/dialogue.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogue/dialogueFiles/final level.dialogue", "res://Dialogue/dialogueFiles/midgame \'echos of the darkened sun\'.dialogue", "res://Dialogue/dialogueFiles/New Dialogue.dialogue", "res://Dialogue/dialogueFiles/tutorial dialogue.dialogue", "res://Dialogue/dialogueFiles/dialogue.dialogue")
 
 [rendering]
 

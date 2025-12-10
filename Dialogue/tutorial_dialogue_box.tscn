@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://4gx7i1v2kyp1"]
+[gd_scene load_steps=2 format=3 uid="uid://diruit2qxiyqu"]
 
 [ext_resource type="Script" uid="uid://cou5hd6sslpp0" path="res://Dialogue/dialogueScript/TutorialDialogueBox.cs" id="1_smrcf"]
 
