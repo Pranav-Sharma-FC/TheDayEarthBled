@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfoi8biflsrk3"]
+[gd_scene load_steps=11 format=3 uid="uid://cfoi8biflsrk3"]
 
 [ext_resource type="Script" uid="uid://drmp7l3pvqext" path="res://Scripts/Player.cs" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="2_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://h474lbldsbxh" path="res://Scenes/bullet.tscn" id="2_vgqql"]
 [ext_resource type="Script" uid="uid://dgig01yqdsc1a" path="res://Scripts/Aims.cs" id="4_vgqql"]
 
@@ -17,6 +17,11 @@ offsets = PackedFloat32Array(0, 0.0651558, 0.651558, 1)
 colors = PackedColorArray(0.685733, 3.10443e-06, 5.77569e-07, 1, 0.901961, 0.211765, 0, 1, 0.804454, 0.737561, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6t5aa"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vgqql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
+size = Vector2(7814, 498)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_rayCast", "_portBullets", "_sternBullets", "_starboardBullets", "_portAimers", "_sternAimers", "_starboardAimers")]
 collision_layer = 129
@@ -124,8 +129,8 @@ position = Vector2(-1, 137)
 
 [node name="Stern" type="CharacterBody2D" parent="Aimers"]
 position = Vector2(0, 832)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 32
+collision_mask = 32
 script = ExtResource("4_vgqql")
 left = "aim_left_stern"
 up = "aim_up_stern"
@@ -143,8 +148,8 @@ texture = ExtResource("2_6t5aa")
 
 [node name="Port" type="CharacterBody2D" parent="Aimers"]
 position = Vector2(-1223, 0)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 32
+collision_mask = 32
 script = ExtResource("4_vgqql")
 left = "aim_left_port"
 up = "aim_up_port"
@@ -167,8 +172,8 @@ texture = ExtResource("2_6t5aa")
 
 [node name="Starboard" type="CharacterBody2D" parent="Aimers"]
 position = Vector2(1272, 0)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 32
+collision_mask = 32
 script = ExtResource("4_vgqql")
 left = "aim_left_starboard"
 up = "aim_up_starboard"
@@ -188,5 +193,30 @@ texture = ExtResource("2_6t5aa")
 position = Vector2(0.999992, 1)
 scale = Vector2(0.14531, -15.1989)
 texture = ExtResource("2_6t5aa")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Aimers"]
+position = Vector2(29, 49)
+scale = Vector2(0.396806, 0.4679)
+collision_layer = 32
+collision_mask = 32
+physics_material_override = SubResource("PhysicsMaterial_vgqql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aimers/StaticBody2D"]
+position = Vector2(-6, -2532)
+shape = SubResource("RectangleShape2D_fkybt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Aimers/StaticBody2D"]
+position = Vector2(4089, -94)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_fkybt")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Aimers/StaticBody2D"]
+position = Vector2(23, 2428)
+shape = SubResource("RectangleShape2D_fkybt")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Aimers/StaticBody2D"]
+position = Vector2(-4063, -37)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_fkybt")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
