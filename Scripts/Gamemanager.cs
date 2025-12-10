@@ -3,18 +3,16 @@ using System;
 
 public partial class Gamemanager : Node2D
 {
-	[Signal] public delegate void GameIsOverEventHandler();
-	[Export] private  CharacterBody2D mainPlayer;
 	[Export] private PackedScene _player;
 	[Export] private Node2D _players;
-	[Export] private Node2D _enemies;
-	[Export] private Node2D _entities;
-	[Export] private PackedScene _enemyScene;
-	private bool _isReloadTime = true;
-	private int _reloadInt;
 	public override void _Ready()
 	{
-		GD.Print("Cool");
+		for (int i = (Input.GetConnectedJoypads().Count); i > 0; i--)
+		{
+			Player player = _player.Instantiate() as Player;
+			_players.AddChild(player);
+			player.DeviceId = i;
+		}
 	}
 
 	public override void _Process(double delta)
@@ -22,42 +20,7 @@ public partial class Gamemanager : Node2D
 		base._Process(delta);
 		if (Input.IsActionJustPressed("escape_debug"))
 			GetTree().Quit();
-		if (_isReloadTime && _enemies.GetChildCount() <= 20)
-		{
-			_isReloadTime = false;
-			spawnEnemy();
-		}
-		if (_players.GetChildCount() == 0)
-		{
-			EmitSignal(SignalName.GameIsOver);
-		}
 	}
-
-	public void SendText(String text)
-	{
-		
-	}
-
-	private async void spawnEnemy()
-	{
-		Enemy enemy = _enemyScene.Instantiate<Enemy>();
-		_enemies.AddChild(enemy);
-		enemy.player = mainPlayer;
-		enemy._players = _players;
-		enemy.BulletTree = _entities;
-		enemy.Position = GetRandomSpawnPosition();
-		await ToSignal(GetTree().CreateTimer(1.0), "timeout");
-		_isReloadTime = true;
-	}
-	
-	private Vector2 GetRandomSpawnPosition()
-	{
-		float x = (float)GD.RandRange(-1920, -1920-1920);
-		float y = (float)GD.RandRange(1920, -1920-1920);
-
-		return new Vector2(x, y);
-	}
-
 	
 	/*public override void _Input(InputEvent @event)
 	{

@@ -1,41 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfoi8biflsrk3"]
+[gd_scene load_steps=4 format=3 uid="uid://cfoi8biflsrk3"]
 
 [ext_resource type="Script" uid="uid://drmp7l3pvqext" path="res://Scripts/Player.cs" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="2_6t5aa"]
-[ext_resource type="PackedScene" uid="uid://h474lbldsbxh" path="res://Scenes/bullet.tscn" id="2_vgqql"]
-[ext_resource type="Script" uid="uid://dgig01yqdsc1a" path="res://Scripts/Aims.cs" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="2_6t5aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
 size = Vector2(135, 238)
 
-[sub_resource type="Gradient" id="Gradient_vgqql"]
-offsets = PackedFloat32Array(0.66289, 0.968839)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="Gradient" id="Gradient_fkybt"]
-offsets = PackedFloat32Array(0, 0.0651558, 0.651558, 1)
-colors = PackedColorArray(0.685733, 3.10443e-06, 5.77569e-07, 1, 0.901961, 0.211765, 0, 1, 0.804454, 0.737561, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6t5aa"]
-
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_rayCast", "_portBullets", "_sternBullets", "_starboardBullets", "_portAimers", "_sternAimers", "_starboardAimers")]
-collision_layer = 129
-collision_mask = 129
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("rayCast")]
 motion_mode = 1
 wall_min_slide_angle = 0.74351
 script = ExtResource("1_cvnsp")
-_rayCast = NodePath("StraightFiring")
-_bullets = ExtResource("2_vgqql")
-_portBullets = NodePath("Port")
-_sternBullets = NodePath("Stern")
-_starboardBullets = NodePath("Starboard")
-_portAimers = NodePath("Aimers/Port")
-_sternAimers = NodePath("Aimers/Stern")
-_starboardAimers = NodePath("Aimers/Starboard")
+player2 = true
+rayCast = NodePath("StraightFiring")
 _acceleration = 1000.0
 _friction = 5.0
 _maxSpeed = 1000.0
-Damage = 1
 
 [node name="ExampleSprite" type="Sprite2D" parent="."]
 position = Vector2(18.5, -87.5)
@@ -53,140 +32,13 @@ collision_mask = 8
 shape = SubResource("RectangleShape2D_bo1nx")
 
 [node name="StraightFiring" type="RayCast2D" parent="."]
-visible = false
 target_position = Vector2(500, 0)
-collision_mask = 0
+collision_mask = 2
 collide_with_areas = true
 
 [node name="ColorRect" type="ColorRect" parent="StraightFiring"]
-visible = false
 offset_left = 2.0
 offset_top = -15.0
 offset_right = 607.0
-
-[node name="ExampleSprite" type="Sprite2D" parent="StraightFiring"]
-position = Vector2(310, -7)
-scale = Vector2(3.45313, -0.293945)
-texture = ExtResource("2_6t5aa")
-
-[node name="Engines" type="CPUParticles2D" parent="."]
-amount = 50
-texture = ExtResource("2_6t5aa")
-lifetime = 0.91
-speed_scale = 2.07
-explosiveness = 0.13
-emission_shape = 3
-emission_rect_extents = Vector2(50, 20)
-angular_velocity_min = -280.8
-angular_velocity_max = 208.8
-color_ramp = SubResource("Gradient_vgqql")
-color_initial_ramp = SubResource("Gradient_fkybt")
-hue_variation_min = -0.83
-hue_variation_max = 1.0
-
-[node name="Stern" type="Node2D" parent="."]
-position = Vector2(-112, -222)
-
-[node name="One" type="Node2D" parent="Stern"]
-position = Vector2(69, 363)
-
-[node name="One2" type="Node2D" parent="Stern"]
-position = Vector2(113, 357)
-
-[node name="One3" type="Node2D" parent="Stern"]
-position = Vector2(155, 365)
-
-[node name="Starboard" type="Node2D" parent="."]
-position = Vector2(-112, -222)
-
-[node name="One" type="Node2D" parent="Starboard"]
-position = Vector2(249, 126)
-
-[node name="One2" type="Node2D" parent="Starboard"]
-position = Vector2(260, 206)
-
-[node name="One3" type="Node2D" parent="Starboard"]
-position = Vector2(260, 298)
-
-[node name="Port" type="Node2D" parent="."]
-position = Vector2(-112, -222)
-
-[node name="One" type="Node2D" parent="Port"]
-position = Vector2(3, 301)
-
-[node name="One2" type="Node2D" parent="Port"]
-position = Vector2(4, 243)
-
-[node name="One3" type="Node2D" parent="Port"]
-position = Vector2(-1, 137)
-
-[node name="Aimers" type="Node2D" parent="."]
-
-[node name="Stern" type="CharacterBody2D" parent="Aimers"]
-position = Vector2(0, 832)
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("4_vgqql")
-left = "aim_left_stern"
-up = "aim_up_stern"
-down = "aim_down_stern"
-right = "aim_right_stern"
-_speed = 1000
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Aimers/Stern"]
-shape = SubResource("CircleShape2D_6t5aa")
-
-[node name="ExampleSprite" type="Sprite2D" parent="Aimers/Stern"]
-position = Vector2(0.999992, 1)
-scale = Vector2(0.14531, -15.1989)
-texture = ExtResource("2_6t5aa")
-
-[node name="Port" type="CharacterBody2D" parent="Aimers"]
-position = Vector2(-1223, 0)
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("4_vgqql")
-left = "aim_left_port"
-up = "aim_up_port"
-down = "aim_down_port"
-right = "aim_right_port"
-_speed = 1000
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Aimers/Port"]
-shape = SubResource("CircleShape2D_6t5aa")
-
-[node name="ExampleSprite" type="Sprite2D" parent="Aimers/Port"]
-position = Vector2(0.999992, 1)
-scale = Vector2(0.0572918, 0.34375)
-texture = ExtResource("2_6t5aa")
-
-[node name="ExampleSprite2" type="Sprite2D" parent="Aimers/Port"]
-position = Vector2(0.999992, 1)
-scale = Vector2(0.14531, -15.1989)
-texture = ExtResource("2_6t5aa")
-
-[node name="Starboard" type="CharacterBody2D" parent="Aimers"]
-position = Vector2(1272, 0)
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("4_vgqql")
-left = "aim_left_starboard"
-up = "aim_up_starboard"
-down = "aim_down_starboard"
-right = "aim_right_starboard"
-_speed = 1000
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Aimers/Starboard"]
-shape = SubResource("CircleShape2D_6t5aa")
-
-[node name="ExampleSprite" type="Sprite2D" parent="Aimers/Starboard"]
-position = Vector2(0.999992, 1)
-scale = Vector2(0.0572918, 0.34375)
-texture = ExtResource("2_6t5aa")
-
-[node name="ExampleSprite2" type="Sprite2D" parent="Aimers/Starboard"]
-position = Vector2(0.999992, 1)
-scale = Vector2(0.14531, -15.1989)
-texture = ExtResource("2_6t5aa")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
