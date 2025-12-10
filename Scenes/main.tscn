@@ -152,6 +152,7 @@ script = ExtResource("7_6bp64")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/PauseMenu"]
 self_modulate = Color(1, 1, 1, 0.556863)
+layout_mode = 0
 offset_left = -3982.0
 offset_top = -2681.0
 offset_right = 4383.0

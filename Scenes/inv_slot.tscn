@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://lqfhh47dbiry"]
+
+[ext_resource type="Texture2D" uid="uid://ocqr4kaowgws" path="res://icon.svg" id="1_qqqon"]
+[ext_resource type="Script" uid="uid://bflj7culuc6so" path="res://Scripts/InvSlot.cs" id="1_usncs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_usncs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qqqon")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="InvSlot" type="Panel"]
+custom_minimum_size = Vector2(65, 65)
+anchors_preset = -1
+offset_right = 65.0
+offset_bottom = 65.0
+script = ExtResource("1_usncs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(32.5, 33)
+scale = Vector2(0.507813, 0.484375)
+sprite_frames = SubResource("SpriteFrames_usncs")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 65.0
+offset_bottom = 66.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Amount" type="Label" parent="CenterContainer/Panel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 14.0
+offset_right = 31.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 12
+text = "1"
+horizontal_alignment = 2
+
+[node name="Item" type="Sprite2D" parent="CenterContainer/Panel"]

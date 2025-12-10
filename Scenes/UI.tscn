@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cihxmmj35s8b0"]
+[gd_scene load_steps=8 format=3 uid="uid://cihxmmj35s8b0"]
 
 [ext_resource type="Script" uid="uid://bacljpta2jtpq" path="res://Scripts/ShipPanel.cs" id="1_dewlx"]
 [ext_resource type="Script" uid="uid://b4clsk4ukde7" path="res://Scripts/UIPanel.cs" id="1_hfhsn"]
 [ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="1_w371h"]
 [ext_resource type="Script" uid="uid://crtgjcwv1hv12" path="res://Scripts/HSlider.cs" id="2_nxvpl"]
+[ext_resource type="PackedScene" uid="uid://qh3xawiaa73u" path="res://Scenes/inventory.tscn" id="5_qwshj"]
 
 [sub_resource type="Shader" id="Shader_w371h"]
 code = "shader_type canvas_item;
@@ -173,3 +174,5 @@ offset_bottom = 133.0
 value = 5.0
 editable = false
 scrollable = false
+
+[node name="Inventory" parent="." instance=ExtResource("5_qwshj")]
