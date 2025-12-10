@@ -14,6 +14,7 @@ public abstract partial class Entity : CharacterBody2D
 	[Export] protected int Sheilds { get; set; } = 100;
 	[Export] protected int MaxSheilds { get; set; } = 100;
 	[Export] protected int SheildRegenSeconds { get; set; } = 1;
+	[Export] protected bool isShield = true;
 	
 	[Export] public int Damage { get; set; } = 100;
 
@@ -21,11 +22,22 @@ public abstract partial class Entity : CharacterBody2D
 	protected abstract void MoveCharacter(double delta);
 	public abstract void TakeDamage(int damage);
 	protected abstract void SpecialEffects();
-	protected abstract void HealthReload();
 	protected abstract void Fire();
 	
 	public abstract Dictionary GetStats();
 
 	public abstract void Death();
+	
+	//Sheild Regen
+	protected async void RegenSheilds()
+	{
+		isShield = false;
+		if ((Sheilds+1) <= MaxSheilds)
+		{
+			Sheilds++; 
+		}
+		await ToSignal(GetTree().CreateTimer(1.0), "timeout");
+		isShield = true;
+	}
 
 }
