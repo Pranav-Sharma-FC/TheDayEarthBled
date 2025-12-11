@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://lqfhh47dbiry"]
 
 [ext_resource type="Texture2D" uid="uid://ocqr4kaowgws" path="res://icon.svg" id="1_qqqon"]
-[ext_resource type="Script" uid="uid://bflj7culuc6so" path="res://Scripts/InvSlot.cs" id="1_usncs"]
+[ext_resource type="Script" uid="uid://byoqpecm4kc41" path="res://Scripts/InventorySlotPanel.cs" id="1_usncs"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_usncs"]
 animations = [{
@@ -14,12 +14,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="InvSlot" type="Panel"]
+[node name="InvSlot" type="Panel" node_paths=PackedStringArray("_amount")]
 custom_minimum_size = Vector2(65, 65)
-anchors_preset = -1
 offset_right = 65.0
 offset_bottom = 65.0
 script = ExtResource("1_usncs")
+_amount = NodePath("CenterContainer/Panel/Amount")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(32.5, 33)

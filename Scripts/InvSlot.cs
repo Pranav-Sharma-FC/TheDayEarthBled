@@ -1,10 +1,8 @@
 using Godot;
-using System;
 
-public partial class InvSlot : Panel
+[Tool]
+public partial class InvSlot : Resource
 {
-	private Sprite2D _item;
-	private Label _amount;
-	
-	
+	[Export] public InvItem Item;
+	[Export] public int Amount;
 }
