@@ -12,9 +12,13 @@ public partial class Enemy : Entity
 	[Export] private PackedScene _bullets;
 	[Export] private Node2D _bulletSpawn;
 	public Node2D BulletTree;
+	private Gamemanager root;
+
 	public override void _Ready()
 	{
-		
+		Node currentScene = GetTree().CurrentScene;
+		if(currentScene is Gamemanager)
+			root = (Gamemanager)currentScene;
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -68,6 +72,7 @@ public partial class Enemy : Entity
 
 	public override void Death()
 	{
+		root.sendScore(5000);
 		this.QueueFree();
 	}
 	

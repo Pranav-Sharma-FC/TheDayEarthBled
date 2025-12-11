@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhw3kxw8ujaim"]
+
+[ext_resource type="Script" uid="uid://bc86mcw51qpqv" path="res://Scripts/MainMenu.cs" id="1_28flt"]
+[ext_resource type="Texture2D" uid="uid://bd6ctddm1jun2" path="res://Assets/pixilart-sprite.png" id="2_48xlc"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28flt")
+
+[node name="Pixilart-sprite" type="Sprite2D" parent="."]
+position = Vector2(2029, 598)
+scale = Vector2(3.20313, 4.02222)
+texture = ExtResource("2_48xlc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -57.0
+offset_top = -45.0
+offset_right = 2060.0
+offset_bottom = 1199.0
+color = Color(0.205117, 0.205117, 0.205117, 0.898039)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 152.0
+offset_right = 1718.0
+offset_bottom = 482.0
+theme_override_font_sizes/font_size = 100
+text = "The Day Earth Bled"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 661.0
+offset_right = 1710.0
+offset_bottom = 991.0
+theme_override_font_sizes/font_size = 40
+text = "Press Start (≡)"
+horizontal_alignment = 1
+vertical_alignment = 1

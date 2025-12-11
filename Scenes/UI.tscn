@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cihxmmj35s8b0"]
+[gd_scene load_steps=8 format=3 uid="uid://cihxmmj35s8b0"]
 
 [ext_resource type="Script" uid="uid://bacljpta2jtpq" path="res://Scripts/ShipPanel.cs" id="1_dewlx"]
 [ext_resource type="Script" uid="uid://b4clsk4ukde7" path="res://Scripts/UIPanel.cs" id="1_hfhsn"]
 [ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_w371h"]
 [ext_resource type="Script" uid="uid://crtgjcwv1hv12" path="res://Scripts/HSlider.cs" id="2_nxvpl"]
+[ext_resource type="Texture2D" uid="uid://b7xhgy0vgaeh3" path="res://icon.svg" id="5_qwshj"]
 
 [sub_resource type="Shader" id="Shader_w371h"]
 code = "shader_type canvas_item;
@@ -25,10 +26,12 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nxvpl"]
 shader = SubResource("Shader_w371h")
 
-[node name="Viewport" type="Control"]
+[node name="Viewport" type="Control" node_paths=PackedStringArray("_end", "_death")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_hfhsn")
+_end = NodePath("Control")
+_death = NodePath("Death")
 
 [node name="Middle" type="Control" parent="."]
 anchors_preset = 0
@@ -173,3 +176,35 @@ offset_bottom = 133.0
 value = 5.0
 editable = false
 scrollable = false
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="End" type="TextureRect" parent="Control"]
+self_modulate = Color(0, 0.419608, 0, 0.556863)
+offset_left = -3982.0
+offset_top = -2681.0
+offset_right = 4383.0
+offset_bottom = 2748.0
+texture = ExtResource("5_qwshj")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "A New Hope emrges
+"
+
+[node name="Death" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(1, 0, 0, 0.556863)
+offset_left = -3982.0
+offset_top = -2681.0
+offset_right = 4383.0
+offset_bottom = 2748.0
+texture = ExtResource("5_qwshj")
+expand_mode = 1

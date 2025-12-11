@@ -162,9 +162,9 @@ public partial class Player : Entity
 			_bulletSpawn = sb;
 			_currentAimer = _starboardAimers;
 			Fire();
-			await ToSignal(GetTree().CreateTimer(0.15), "timeout");
+			await ToSignal(GetTree().CreateTimer(0.05), "timeout");
 		}
-		await ToSignal(GetTree().CreateTimer(0.75), "timeout");
+		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
 		_isStarboardReloadTime = true;
 	}
 	
@@ -176,9 +176,9 @@ public partial class Player : Entity
 			_bulletSpawn = port;
 			_currentAimer = _portAimers;
 			Fire();
-			await ToSignal(GetTree().CreateTimer(0.15), "timeout");
+			await ToSignal(GetTree().CreateTimer(0.05), "timeout");
 		}
-		await ToSignal(GetTree().CreateTimer(0.75), "timeout");
+		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
 		_isPortReloadTime = true;
 	}
 

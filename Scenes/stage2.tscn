@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://diwxcvgykk2t8"]
+[gd_scene load_steps=15 format=4 uid="uid://b11u7pcq7q8a3"]
 
 [ext_resource type="Script" uid="uid://cxdqpqrepqf4j" path="res://Scripts/Gamemanager.cs" id="1_ksd43"]
 [ext_resource type="PackedScene" uid="uid://bxx0l448l3pxh" path="res://Scenes/enemy.tscn" id="2_3ar5n"]

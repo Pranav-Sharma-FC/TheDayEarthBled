@@ -3,7 +3,8 @@ using System;
 
 public partial class Gamemanager : Node2D
 {
-	[Signal] public delegate void GameIsOverEventHandler();
+	[Signal] public delegate void DeathEventHandler(); 
+	[Signal] public delegate void EndingEventHandler();
 	[Export] private  CharacterBody2D mainPlayer;
 	[Export] private PackedScene _player;
 	[Export] private Node2D _players;
@@ -12,6 +13,7 @@ public partial class Gamemanager : Node2D
 	[Export] private PackedScene _enemyScene;
 	private bool _isReloadTime = true;
 	private int _reloadInt;
+	private int _score;
 	public override void _Ready()
 	{
 		GD.Print("Cool");
@@ -29,13 +31,24 @@ public partial class Gamemanager : Node2D
 		}
 		if (_players.GetChildCount() == 0)
 		{
-			EmitSignal(SignalName.GameIsOver);
+			EmitSignal(SignalName.Death);
+		}
+
+		if (_score >= 5000)
+		{
+			GD.Print("Score: " + _score);
+			EmitSignal(SignalName.Ending);
 		}
 	}
 
 	public void SendText(String text)
 	{
 		
+	}
+
+	public void sendScore(int score)
+	{
+		this._score += score;
 	}
 
 	private async void spawnEnemy()
