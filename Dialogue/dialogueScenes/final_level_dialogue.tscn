@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://i1bpyjilovs2"]
+
+[ext_resource type="Script" uid="uid://d0s2n5esifssk" path="res://Scripts/dialogueScripts/TutorialDialogue.cs" id="1_4q04p"]
+
+[node name="finalLevelDialogue" type="Label"]
+offset_right = 360.0
+offset_bottom = 143.0
+text = ":("
+script = ExtResource("1_4q04p")

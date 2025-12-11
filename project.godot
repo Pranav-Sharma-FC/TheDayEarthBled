@@ -86,7 +86,8 @@ folder_colors={
 "res://Dialogue/": "teal",
 "res://Documentation/": "gray",
 "res://Scenes/": "red",
-"res://Scripts/": "yellow"
+"res://Scripts/": "yellow",
+"res://Scripts/dialogueScripts/": "teal"
 }
 
 [input]

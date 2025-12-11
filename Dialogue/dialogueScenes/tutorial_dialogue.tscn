@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d0s2n5esifssk" path="res://Scripts/dialogueScripts/TutorialDialogue.cs" id="1_mlrdi"]
 
-[node name="levelOneDialogue" type="Label" node_paths=PackedStringArray("_referenceToLabel")]
+[node name="levelOneDialogue" type="Label"]
 offset_right = 137.0
 offset_bottom = 63.0
 script = ExtResource("1_mlrdi")
-_referenceToLabel = NodePath(".")
