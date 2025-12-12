@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bacljpta2jtpq" path="res://Scripts/ShipPanel.cs" id="1_dewlx"]
 [ext_resource type="Script" uid="uid://b4clsk4ukde7" path="res://Scripts/UIPanel.cs" id="1_hfhsn"]
-[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_w371h"]
+[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="1_w371h"]
 [ext_resource type="Script" uid="uid://crtgjcwv1hv12" path="res://Scripts/HSlider.cs" id="2_nxvpl"]
 
 [sub_resource type="Shader" id="Shader_w371h"]

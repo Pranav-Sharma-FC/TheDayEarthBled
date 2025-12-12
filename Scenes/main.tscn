@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cxdqpqrepqf4j" path="res://Scripts/Gamemanager.cs" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cfoi8biflsrk3" path="res://Scenes/player.tscn" id="1_bo1nx"]
-[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bxx0l448l3pxh" path="res://Scenes/enemy.tscn" id="4_21xkr"]
 [ext_resource type="Script" uid="uid://c86qb7qvl7j10" path="res://Scripts/Camera.cs" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://cihxmmj35s8b0" path="res://Scenes/UI.tscn" id="5_kry3j"]
 [ext_resource type="Script" uid="uid://dxlr7cm7druoo" path="res://Scripts/PauseMenu.cs" id="7_6bp64"]
-[ext_resource type="Texture2D" uid="uid://b7xhgy0vgaeh3" path="res://icon.svg" id="8_344ge"]
+[ext_resource type="Texture2D" uid="uid://ocqr4kaowgws" path="res://icon.svg" id="8_344ge"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_21xkr"]
 script/source = "using Godot;
