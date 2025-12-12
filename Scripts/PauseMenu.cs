@@ -20,10 +20,12 @@ public partial class PauseMenu : Control
 			this.Visible = !this.Visible;
 			GetTree().Paused = !GetTree().Paused;
 		}
+		if (Input.IsActionJustPressed("escape_debug"))
+			GetTree().Quit();
 	}
 
 	private void Death()
 	{
-		this.ProcessMode = ProcessModeEnum.Inherit;
+		
 	}
 }

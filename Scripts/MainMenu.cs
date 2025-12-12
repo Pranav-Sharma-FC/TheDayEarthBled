@@ -16,6 +16,9 @@ public partial class MainMenu : Control
     {
         if (Input.IsActionJustPressed("start"))
             SwitchScenes();    
+        
+        if (Input.IsActionJustPressed("escape_debug"))
+            GetTree().Quit();
     }
 
     private void SwitchScenes()

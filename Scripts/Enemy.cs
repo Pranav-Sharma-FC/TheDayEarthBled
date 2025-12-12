@@ -13,6 +13,7 @@ public partial class Enemy : Entity
 	[Export] private Node2D _bulletSpawn;
 	public Node2D BulletTree;
 	private Gamemanager root;
+	[Export] private float _time;
 
 	public override void _Ready()
 	{
@@ -42,7 +43,7 @@ public partial class Enemy : Entity
 	protected override void MoveCharacter(double delta)
 	{
 		Vector2 direction = (player.GlobalPosition - this.GlobalPosition).Normalized();
-		direction *= new Vector2(1, 0.2f);
+		direction *= new Vector2(1, 0.05f);
 		// Accelerate in that direction
 		Velocity += direction * _maxSpeed * (float)delta;
 
@@ -72,7 +73,7 @@ public partial class Enemy : Entity
 
 	public override void Death()
 	{
-		root.sendScore(5000);
+		root.sendScore(2000);
 		this.QueueFree();
 	}
 	
@@ -99,7 +100,7 @@ public partial class Enemy : Entity
 		Vector2 mousePos = player.GlobalPosition;
 		bull.Direction = (mousePos - this.GlobalPosition).Normalized();
 		BulletTree.AddChild(bull);
-		await ToSignal(GetTree().CreateTimer(1), "timeout");
+		await ToSignal(GetTree().CreateTimer(_time), "timeout");
 		_isReloadTime = true;
 	}
 	

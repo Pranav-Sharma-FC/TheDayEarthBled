@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=4 uid="uid://b11u7pcq7q8a3"]
+[gd_scene load_steps=14 format=4 uid="uid://b11u7pcq7q8a3"]
 
 [ext_resource type="Script" uid="uid://cxdqpqrepqf4j" path="res://Scripts/Gamemanager.cs" id="1_ksd43"]
-[ext_resource type="PackedScene" uid="uid://bxx0l448l3pxh" path="res://Scenes/enemy.tscn" id="2_3ar5n"]
 [ext_resource type="PackedScene" uid="uid://cfoi8biflsrk3" path="res://Scenes/player.tscn" id="3_hn6pn"]
 [ext_resource type="Script" uid="uid://c86qb7qvl7j10" path="res://Scripts/Camera.cs" id="4_lgkra"]
 [ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="5_rljtk"]
@@ -89,7 +88,6 @@ mainPlayer = NodePath("Players/FunTime")
 _players = NodePath("Players")
 _enemies = NodePath("Entities/Enemy")
 _entities = NodePath("Entities")
-_enemyScene = ExtResource("2_3ar5n")
 
 [node name="Players" type="Node2D" parent="."]
 script = SubResource("CSharpScript_21xkr")

@@ -185,6 +185,7 @@ offset_bottom = 40.0
 
 [node name="End" type="TextureRect" parent="Control"]
 self_modulate = Color(0, 0.419608, 0, 0.556863)
+layout_mode = 0
 offset_left = -3982.0
 offset_top = -2681.0
 offset_right = 4383.0
@@ -202,6 +203,7 @@ text = "A New Hope emrges
 [node name="Death" type="TextureRect" parent="."]
 visible = false
 self_modulate = Color(1, 0, 0, 0.556863)
+layout_mode = 0
 offset_left = -3982.0
 offset_top = -2681.0
 offset_right = 4383.0
