@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+//Unused example player class from base project
 public partial class ExamplePlayer : CharacterBody2D
 {
 	[Export]

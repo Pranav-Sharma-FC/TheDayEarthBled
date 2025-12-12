@@ -2,13 +2,16 @@ using Godot;
 using System;
 using Godot.Collections;
 
+//Abstract class for Entities in the game, managing movement and health, as well as required functions	
 public abstract partial class Entity : CharacterBody2D
 {
+	//Movement
 	[Export] protected float _acceleration = 600f;   // How fast the ship accelerates
 	[Export] protected float _friction = 20f;       // Slows ship down when no input
 	[Export] protected float _maxSpeed = 600f;      // How much the ship can go too 
 	[Export] protected Vector2 _velocityDisplay = Vector2.Zero;
 	
+	//Health
 	[Export] protected int Health { get; set; } = 100;
 	[Export] protected int MaxHealth { get; set; } = 100;
 	[Export] protected int Sheilds { get; set; } = 100;

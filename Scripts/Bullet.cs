@@ -4,8 +4,10 @@ using Godot.Collections;
 
 public partial class Bullet : Entity
 {
+	//If its enemy or not
 	[Export] private bool _allied;
 	public Vector2 Direction = Vector2.Zero;
+	//Uses a target to get direction
 	public Node2D target;
 	
 	public override void _Ready()
@@ -13,6 +15,7 @@ public partial class Bullet : Entity
 		if (target != null || GodotObject.IsInstanceValid(target))
 			Direction = (target.GlobalPosition - this.GlobalPosition).Normalized();
 			GD.Print("Direction");
+		//Moves bullet initially
 		Velocity = Direction * _maxSpeed;
 		GD.Print(Velocity);
 		Fire();
@@ -27,7 +30,8 @@ public partial class Bullet : Entity
 	}
 
 	protected override void MoveCharacter(double delta)
-	{ 
+	{
+		//Simple bullet movement with friction
 		Velocity = Velocity.MoveToward(Direction, _friction * (float)delta);
 	}
 
@@ -43,6 +47,7 @@ public partial class Bullet : Entity
 
 	protected async override void Fire()
 	{
+		//Kills it after some time
 		await ToSignal(GetTree().CreateTimer(5.0), "timeout");
 		Death();
 	}
@@ -54,6 +59,7 @@ public partial class Bullet : Entity
 	
 	public void OnBodyEntered(Node2D body)
 	{ 
+		//Collides with enemey/player and makes them take damage, then despawns
 		GD.Print("Collided with: ", body, " of type: ", body.GetType());
 		if ((body is Enemy) && _allied)
 		{
@@ -74,6 +80,7 @@ public partial class Bullet : Entity
 
 	public override void Death()
 	{
+		//Removes bullet from scenetree
 		QueueFree();
 	}
 }

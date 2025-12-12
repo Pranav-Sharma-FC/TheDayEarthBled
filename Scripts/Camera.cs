@@ -3,6 +3,7 @@ using System;
 
 public partial class Camera : Camera2D
 {
+	//Unused Camera Script...
 	[Export] private CharacterBody2D player1;
 	[Export] private CharacterBody2D player2;
 	[Export] public CharacterBody2D player3;

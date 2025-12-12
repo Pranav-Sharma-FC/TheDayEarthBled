@@ -1,15 +1,19 @@
 using Godot;
 using System;
 
+//Manages game 
 public partial class Gamemanager : Node2D
 {
+	//Sends out signal when there are no more players
 	[Signal] public delegate void GameIsOverEventHandler();
+	//Gets node exports (mainly to pass onto enemies when created)
 	[Export] private  CharacterBody2D mainPlayer;
 	[Export] private PackedScene _player;
 	[Export] private Node2D _players;
 	[Export] private Node2D _enemies;
 	[Export] private Node2D _entities;
 	[Export] private PackedScene _enemyScene;
+	//Reloads enemy creation + creates enemy limit
 	private bool _isReloadTime = true;
 	private int _reloadInt;
 	public override void _Ready()
@@ -20,13 +24,16 @@ public partial class Gamemanager : Node2D
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+		//Escapes game
 		if (Input.IsActionJustPressed("escape_debug"))
 			GetTree().Quit();
+		//Spawns enemy
 		if (_isReloadTime && _enemies.GetChildCount() <= 20)
 		{
 			_isReloadTime = false;
 			spawnEnemy();
 		}
+		//Sends out signal (nothings connected)
 		if (_players.GetChildCount() == 0)
 		{
 			EmitSignal(SignalName.GameIsOver);
@@ -35,9 +42,10 @@ public partial class Gamemanager : Node2D
 
 	public void SendText(String text)
 	{
-		
+		//Work in progress
 	}
-
+	
+	//Spawns in enemy.
 	private async void spawnEnemy()
 	{
 		Enemy enemy = _enemyScene.Instantiate<Enemy>();
@@ -50,6 +58,7 @@ public partial class Gamemanager : Node2D
 		_isReloadTime = true;
 	}
 	
+	//Randomizes spawn position
 	private Vector2 GetRandomSpawnPosition()
 	{
 		float x = (float)GD.RandRange(-1920, -1920-1920);
@@ -58,7 +67,7 @@ public partial class Gamemanager : Node2D
 		return new Vector2(x, y);
 	}
 
-	
+	//Unused code for controller handling. 
 	/*public override void _Input(InputEvent @event)
 	{
 		// Send input to each player
