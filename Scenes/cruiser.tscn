@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxx0l448l3pxh"]
+[gd_scene load_steps=8 format=3 uid="uid://cs801xjbj47ty"]
 
-[ext_resource type="Script" uid="uid://cfktctpvw5vfm" path="res://Scripts/Enemy.cs" id="1_1f0kj"]
-[ext_resource type="PackedScene" uid="uid://duamlumy8sjd1" path="res://Scenes/enemybullet.tscn" id="2_287tu"]
-[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="2_afpow"]
-[ext_resource type="Texture2D" uid="uid://c3dm0n25ty4l4" path="res://Assets/everything.png" id="3_287tu"]
+[ext_resource type="Script" uid="uid://cfktctpvw5vfm" path="res://Scripts/Enemy.cs" id="1_rkoam"]
+[ext_resource type="PackedScene" uid="uid://duamlumy8sjd1" path="res://Scenes/enemybullet.tscn" id="2_7f0rw"]
+[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="3_av8mq"]
+[ext_resource type="Texture2D" uid="uid://c3dm0n25ty4l4" path="res://Assets/everything.png" id="4_7f0rw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
 size = Vector2(135, 238)
@@ -27,23 +27,30 @@ linear_accel_min = 100.0
 linear_accel_max = 100.0
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("rayCast", "_bulletSpawn")]
+scale = Vector2(1.5, 1.5)
 collision_layer = 264
 collision_mask = 257
-script = ExtResource("1_1f0kj")
+script = ExtResource("1_rkoam")
 rayCast = NodePath("StraightFiring")
-_bullets = ExtResource("2_287tu")
+_bullets = ExtResource("2_7f0rw")
 _bulletSpawn = NodePath("CollisionShape2D")
-_time = 1.0
+_time = 0.2
 _acceleration = 40.0
 _friction = 900.0
-_maxSpeed = 400.0
-Damage = 1
+_maxSpeed = 200.0
+Health = 200
+MaxHealth = 200
+Sheilds = 50
+MaxSheilds = 50
+Damage = 10
 
 [node name="ExampleSprite" type="Sprite2D" parent="."]
-modulate = Color(0.807843, 0.270588, 0.2, 1)
-position = Vector2(75, -101)
-scale = Vector2(2.04591, 4.90621)
-texture = ExtResource("3_287tu")
+visible = false
+modulate = Color(1, 0, 0, 1)
+position = Vector2(18.5, -87.5)
+rotation = 1.26885
+scale = Vector2(0.619792, 9.40625)
+texture = ExtResource("3_av8mq")
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -81,18 +88,25 @@ offset_right = 607.0
 [node name="ExampleSprite" type="Sprite2D" parent="StraightFiring"]
 position = Vector2(310, -7)
 scale = Vector2(3.45313, -0.293945)
-texture = ExtResource("2_afpow")
+texture = ExtResource("3_av8mq")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 100
 sub_emitter = NodePath(".")
-texture = ExtResource("2_afpow")
+texture = ExtResource("3_av8mq")
 lifetime = 5.3
 speed_scale = 21.36
 explosiveness = 0.13
 trail_lifetime = 3.65
 process_material = SubResource("ParticleProcessMaterial_1f0kj")
+
+[node name="ExampleSprite2" type="Sprite2D" parent="."]
+modulate = Color(0.352941, 0.109804, 0.0745098, 1)
+position = Vector2(75, -101)
+scale = Vector2(2.04591, 4.90621)
+texture = ExtResource("4_7f0rw")
+flip_v = true
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
 [connection signal="body_entered" from="Area2D2" to="." method="OnBodyEntered"]

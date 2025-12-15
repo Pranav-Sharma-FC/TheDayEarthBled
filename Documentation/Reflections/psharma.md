@@ -16,3 +16,15 @@ I need to start grinding over the weekends
 
 
 ## Sprint 3
+In sprint 3 we finished up the game
+### Work Done
+Added Multiplayer And Controller Controls
+Enemy Tracking
+Bullets
+UI Fixes
+### Difficulties
+Getting the work I wanted done 
+### Surprises
+How much work I can get when I get locked in
+### Lessons
+Do or do not, there is no try.

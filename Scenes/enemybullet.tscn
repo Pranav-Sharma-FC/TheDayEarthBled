@@ -1,19 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://duamlumy8sjd1"]
+[gd_scene load_steps=5 format=3 uid="uid://duamlumy8sjd1"]
 
 [ext_resource type="Script" uid="uid://bjuilbbworkj0" path="res://Scripts/Bullet.cs" id="1_0y01j"]
-[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="2_yhite"]
+[ext_resource type="Texture2D" uid="uid://c3dm0n25ty4l4" path="res://Assets/everything.png" id="2_0y01j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mw4s"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oduel"]
-atlas = ExtResource("2_yhite")
-region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ycag2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oduel")
+"texture": ExtResource("2_0y01j")
 }],
 "loop": true,
 "name": &"default",
@@ -26,14 +22,14 @@ collision_mask = 0
 script = ExtResource("1_0y01j")
 _friction = 10.0
 _maxSpeed = 2400.0
-Damage = 1
+Damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4mw4s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.567494, 0.000290902, 0.584045, 1)
-position = Vector2(2, -6)
+modulate = Color(0.807843, 0.545098, 0.52549, 1)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ycag2")
 
 [node name="Area2D" type="Area2D" parent="."]

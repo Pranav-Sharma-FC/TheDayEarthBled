@@ -12,9 +12,14 @@ public partial class Enemy : Entity
 	[Export] private PackedScene _bullets;
 	[Export] private Node2D _bulletSpawn;
 	public Node2D BulletTree;
+	private Gamemanager root;
+	[Export] private float _time;
+
 	public override void _Ready()
 	{
-		
+		Node currentScene = GetTree().CurrentScene;
+		if(currentScene is Gamemanager)
+			root = (Gamemanager)currentScene;
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -38,7 +43,7 @@ public partial class Enemy : Entity
 	protected override void MoveCharacter(double delta)
 	{
 		Vector2 direction = (player.GlobalPosition - this.GlobalPosition).Normalized();
-		direction *= new Vector2(1, 0.2f);
+		direction *= new Vector2(1, 0.05f);
 		// Accelerate in that direction
 		Velocity += direction * _maxSpeed * (float)delta;
 
@@ -68,6 +73,10 @@ public partial class Enemy : Entity
 
 	public override void Death()
 	{
+		root.sendScore(100);
+		root.scrapMetal += GD.RandRange(40, 70);
+		root.scrapExplodey += GD.RandRange(10, 100);
+		root.scrapElectic += GD.RandRange(30, 50);
 		this.QueueFree();
 	}
 	
@@ -94,7 +103,7 @@ public partial class Enemy : Entity
 		Vector2 mousePos = player.GlobalPosition;
 		bull.Direction = (mousePos - this.GlobalPosition).Normalized();
 		BulletTree.AddChild(bull);
-		await ToSignal(GetTree().CreateTimer(1), "timeout");
+		await ToSignal(GetTree().CreateTimer(_time), "timeout");
 		_isReloadTime = true;
 	}
 	

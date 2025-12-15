@@ -40,6 +40,11 @@ public partial class Bullet : Entity
 	{
 		throw new NotImplementedException();
 	}
+	
+	public void NewDamage()
+	{
+		this.Damage *= 2;
+	}
 
 	protected async override void Fire()
 	{
