@@ -232,6 +232,7 @@ label_settings = SubResource("LabelSettings_hfhsn")
 [node name="Death" type="TextureRect" parent="."]
 visible = false
 self_modulate = Color(0.752941, 0, 0, 1)
+layout_mode = 0
 offset_left = -344.0
 offset_top = -348.0
 offset_right = 8021.0
