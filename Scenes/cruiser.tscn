@@ -26,7 +26,7 @@ gravity = Vector3(0, 98, 0)
 linear_accel_min = 100.0
 linear_accel_max = 100.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("rayCast", "_bulletSpawn")]
+[node name="Enemy2" type="CharacterBody2D" node_paths=PackedStringArray("rayCast", "_bulletSpawn")]
 scale = Vector2(1.5, 1.5)
 collision_layer = 264
 collision_mask = 257
