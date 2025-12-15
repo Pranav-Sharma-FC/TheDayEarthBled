@@ -73,7 +73,10 @@ public partial class Enemy : Entity
 
 	public override void Death()
 	{
-		root.sendScore(2000);
+		root.sendScore(100);
+		root.scrapMetal += GD.RandRange(40, 70);
+		root.scrapExplodey += GD.RandRange(10, 100);
+		root.scrapElectic += GD.RandRange(30, 50);
 		this.QueueFree();
 	}
 	

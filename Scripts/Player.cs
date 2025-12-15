@@ -45,7 +45,16 @@ public partial class Player : Entity
 	private bool _isPortReloadTime = true;
 	private bool _isStarboardReloadTime = true;
 	private bool _isSternReloadTime = true;
-
+	private bool _isPortUpgraded = false;
+	private bool _isStarboardUpgraded = false;
+	private bool _isSternUpgraded = false;
+	private Gamemanager root;
+	public override void _Ready()
+	{
+		Node currentScene = GetTree().CurrentScene;
+		if(currentScene is Gamemanager)
+			root = (Gamemanager)currentScene;
+	}
 	// Called by GameManager
 	/*public override void _Input(InputEvent @event)
 	{
@@ -86,14 +95,51 @@ public partial class Player : Entity
 				input.Y += 1;
 			if (Input.IsActionPressed("shoot"))
 				GD.Print(":laser");//Fire();
-			if (Input.IsActionPressed("shoot_port") & _isPortReloadTime)
-				FirePort();
-			if (Input.IsActionPressed("shoot_stern") & _isSternReloadTime)
-				FireStern();
-			if (Input.IsActionPressed("shoot_starboard") & _isStarboardReloadTime)
-				FireStarboard();
-			
-
+			if (Input.IsActionPressed("shoot_port") && _isPortReloadTime)
+				FirePort(_isPortUpgraded);
+			if (Input.IsActionPressed("shoot_stern") && _isSternReloadTime)
+				FireStern(_isSternUpgraded);
+			if (Input.IsActionPressed("shoot_starboard") && _isStarboardReloadTime)
+				FireStarboard(_isStarboardUpgraded);
+			if (Input.IsActionPressed("upgrade_port"))
+			{
+				if(!_isPortUpgraded)
+				{
+					if ((root.scrapMetal >= 50) && (root.scrapExplodey >= 50) && (root.scrapElectic >= 50))
+					{
+						root.scrapMetal += -50;
+						root.scrapExplodey += -50;//GD.RandRange(10, 100);
+						root.scrapElectic += -50;// GD.RandRange(30, 50);
+						_isPortUpgraded = true;
+					}
+				}			
+			}
+			if (Input.IsActionPressed("upgrade_stern"))
+			{
+				if(!_isSternUpgraded)
+				{
+					if ((root.scrapMetal >= 50) && (root.scrapExplodey >= 50) && (root.scrapElectic >= 50))
+					{
+						root.scrapMetal += -50;
+						root.scrapExplodey += -50;//GD.RandRange(10, 100);
+						root.scrapElectic += -50;// GD.RandRange(30, 50);
+						_isSternUpgraded = true;
+					}
+				}
+			}
+			if (Input.IsActionPressed("upgrade_starboard"))
+			{
+				if(!_isStarboardUpgraded)
+				{
+					if ((root.scrapMetal >= 50) && (root.scrapExplodey >= 50) && (root.scrapElectic >= 50))
+					{
+						root.scrapMetal += -50;
+						root.scrapExplodey += -50;//GD.RandRange(10, 100);
+						root.scrapElectic += -50;// GD.RandRange(30, 50);
+						_isStarboardUpgraded = true;
+					}
+				}			
+			}
 			Velocity = Vector2.Zero;
 			input = input.Normalized();
 
@@ -140,42 +186,42 @@ public partial class Player : Entity
 		return closest;
 	}
 
-	private async void FireStern()
+	private async void FireStern(bool _something)
 	{
 		_isSternReloadTime = false;
 		foreach (Node2D stern in _sternBullets.GetChildren())
 		{
 			_bulletSpawn = stern;
 			_currentAimer = _sternAimers;
-			Fire();
+			FireTreu(_something);
 			await ToSignal(GetTree().CreateTimer(0.05), "timeout");
 		}
 		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
 		_isSternReloadTime = true;
 	}
 	
-	private async void FireStarboard()
+	private async void FireStarboard(bool _something)
 	{
 		_isStarboardReloadTime = false;
 		foreach (Node2D sb in _starboardBullets.GetChildren())
 		{
 			_bulletSpawn = sb;
 			_currentAimer = _starboardAimers;
-			Fire();
+			FireTreu(_something);
 			await ToSignal(GetTree().CreateTimer(0.05), "timeout");
 		}
 		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
 		_isStarboardReloadTime = true;
 	}
 	
-	private async void FirePort()
+	private async void FirePort(bool _something)
 	{
 		_isPortReloadTime = false;
 		foreach (Node2D port in _portBullets.GetChildren())
 		{
 			_bulletSpawn = port;
 			_currentAimer = _portAimers;
-			Fire();
+			FireTreu(_something);
 			await ToSignal(GetTree().CreateTimer(0.05), "timeout");
 		}
 		await ToSignal(GetTree().CreateTimer(0.1), "timeout");
@@ -204,8 +250,12 @@ public partial class Player : Entity
 	{
 		
 	}
-
 	protected override void Fire()
+	{
+		GD.Print("EEEE");
+	}
+
+	protected void FireTreu(bool _something)
 	{
 		_isBulletReloadTime = false;
 		Bullet bull = _bullets.Instantiate<Bullet>();
@@ -213,6 +263,11 @@ public partial class Player : Entity
 			GD.RandRange(-50, 50),
 			GD.RandRange(-50, 50)
 		);
+		if(_something)
+		{
+			GD.Print("Oh Yeahhhh");
+			bull.NewDamage();			
+		}
 		bull.target = _currentAimer;
 		bull.Position = _bulletSpawn.GlobalPosition + randomOffset;
 		_bulletTree.AddChild(bull);

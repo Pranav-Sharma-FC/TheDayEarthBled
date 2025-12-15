@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cs801xjbj47ty"]
+[gd_scene load_steps=8 format=3 uid="uid://cs801xjbj47ty"]
 
 [ext_resource type="Script" uid="uid://cfktctpvw5vfm" path="res://Scripts/Enemy.cs" id="1_rkoam"]
 [ext_resource type="PackedScene" uid="uid://duamlumy8sjd1" path="res://Scenes/enemybullet.tscn" id="2_7f0rw"]
-[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="3_av8mq"]
+[ext_resource type="Texture2D" uid="uid://beb5pgpq561g3" path="res://Assets/ExampleSprite.png" id="3_av8mq"]
+[ext_resource type="Texture2D" uid="uid://c3dm0n25ty4l4" path="res://Assets/everything.png" id="4_7f0rw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
 size = Vector2(135, 238)
@@ -37,9 +38,14 @@ _time = 0.2
 _acceleration = 40.0
 _friction = 900.0
 _maxSpeed = 200.0
+Health = 200
+MaxHealth = 200
+Sheilds = 50
+MaxSheilds = 50
 Damage = 10
 
 [node name="ExampleSprite" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 0, 0, 1)
 position = Vector2(18.5, -87.5)
 rotation = 1.26885
@@ -94,6 +100,13 @@ speed_scale = 21.36
 explosiveness = 0.13
 trail_lifetime = 3.65
 process_material = SubResource("ParticleProcessMaterial_1f0kj")
+
+[node name="ExampleSprite2" type="Sprite2D" parent="."]
+modulate = Color(0.352941, 0.109804, 0.0745098, 1)
+position = Vector2(75, -101)
+scale = Vector2(2.04591, 4.90621)
+texture = ExtResource("4_7f0rw")
+flip_v = true
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
 [connection signal="body_entered" from="Area2D2" to="." method="OnBodyEntered"]

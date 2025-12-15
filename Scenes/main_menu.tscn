@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhw3kxw8ujaim"]
 
 [ext_resource type="Script" uid="uid://bc86mcw51qpqv" path="res://Scripts/MainMenu.cs" id="1_28flt"]
-[ext_resource type="Texture2D" uid="uid://bd6ctddm1jun2" path="res://Assets/pixilart-sprite.png" id="2_48xlc"]
+[ext_resource type="Texture2D" uid="uid://c6sfwq5ocl3mx" path="res://Assets/pixilart-sprite.png" id="2_48xlc"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -13,6 +13,7 @@ grow_vertical = 2
 script = ExtResource("1_28flt")
 
 [node name="Pixilart-sprite" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.21268, 0.159696, 1)
 position = Vector2(2029, 598)
 scale = Vector2(3.20313, 4.02222)
 texture = ExtResource("2_48xlc")
@@ -23,7 +24,7 @@ offset_left = -57.0
 offset_top = -45.0
 offset_right = 2060.0
 offset_bottom = 1199.0
-color = Color(0.205117, 0.205117, 0.205117, 0.898039)
+color = Color(0.203922, 0.203922, 0.203922, 0.968627)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

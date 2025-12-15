@@ -1,49 +1,45 @@
-[gd_scene load_steps=8 format=3 uid="uid://cihxmmj35s8b0"]
+[gd_scene load_steps=9 format=3 uid="uid://cihxmmj35s8b0"]
 
 [ext_resource type="Script" uid="uid://bacljpta2jtpq" path="res://Scripts/ShipPanel.cs" id="1_dewlx"]
 [ext_resource type="Script" uid="uid://b4clsk4ukde7" path="res://Scripts/UIPanel.cs" id="1_hfhsn"]
-[ext_resource type="Texture2D" uid="uid://d3cc3gmuopegp" path="res://Assets/ExampleSprite.png" id="1_w371h"]
-[ext_resource type="Script" uid="uid://crtgjcwv1hv12" path="res://Scripts/HSlider.cs" id="2_nxvpl"]
-[ext_resource type="Texture2D" uid="uid://b7xhgy0vgaeh3" path="res://icon.svg" id="5_qwshj"]
+[ext_resource type="Texture2D" uid="uid://c3dm0n25ty4l4" path="res://Assets/everything.png" id="3_hfhsn"]
+[ext_resource type="Texture2D" uid="uid://c6sfwq5ocl3mx" path="res://Assets/pixilart-sprite.png" id="5_48q88"]
 
-[sub_resource type="Shader" id="Shader_w371h"]
-code = "shader_type canvas_item;
+[sub_resource type="LabelSettings" id="LabelSettings_qwshj"]
+font_color = Color(0.105882, 0.0862745, 0.00392157, 1)
 
-void vertex() {
-	// Called for every vertex the material is visible on.
+[sub_resource type="CSharpScript" id="CSharpScript_hfhsn"]
+script/source = "using Godot;
+using System;
+
+public partial class HSlider : Godot.HSlider
+{
+	
 }
-
-void fragment() {
-	// Called for every pixel the material is visible on.
-}
-
-//void light() {
-//	// Called for every pixel for every light affecting the CanvasItem.
-//	// Uncomment to replace the default light processing function with this one.
-//}
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nxvpl"]
-shader = SubResource("Shader_w371h")
+[sub_resource type="LabelSettings" id="LabelSettings_48q88"]
+font_size = 36
+font_color = Color(0.105882, 0.0862745, 0.00392157, 1)
 
-[node name="Viewport" type="Control" node_paths=PackedStringArray("_end", "_death")]
+[sub_resource type="LabelSettings" id="LabelSettings_hfhsn"]
+font_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+
+[node name="Viewport" type="Control" node_paths=PackedStringArray("_label", "_explodey", "_electic", "_metal", "_scorees", "_end", "_death")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_hfhsn")
+_label = NodePath("Middle/Label2")
+_explodey = NodePath("topRight/Label3")
+_electic = NodePath("topRight/Label4")
+_metal = NodePath("topRight/Label2")
+_scorees = NodePath("topRight/Label5")
 _end = NodePath("Control")
 _death = NodePath("Death")
 
 [node name="Middle" type="Control" parent="."]
+z_index = 1
 anchors_preset = 0
-
-[node name="topColorRect" type="ColorRect" parent="Middle"]
-layout_mode = 0
-offset_left = 582.0
-offset_top = -1.0
-offset_right = 1228.0
-offset_bottom = 37.0
-scale = Vector2(1, 1.88)
-color = Color(0.34902, 0.34902, 0.34902, 1)
 
 [node name="ColorRect" type="ColorRect" parent="Middle"]
 layout_mode = 0
@@ -52,7 +48,7 @@ offset_top = 1127.32
 offset_right = 862.0
 offset_bottom = 1311.32
 rotation = -1.04205
-color = Color(0.34902, 0.34902, 0.34902, 1)
+color = Color(0.501961, 0.466667, 0.298039, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="Middle"]
 layout_mode = 0
@@ -61,7 +57,7 @@ offset_top = 1006.32
 offset_right = 1262.0
 offset_bottom = 1368.32
 rotation = 1.5708
-color = Color(0.34902, 0.34902, 0.34902, 1)
+color = Color(0.501961, 0.466667, 0.298039, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="Middle"]
 layout_mode = 0
@@ -70,7 +66,23 @@ offset_top = 1211.32
 offset_right = 1227.0
 offset_bottom = 1376.32
 rotation = -2.11672
-color = Color(0.34902, 0.34902, 0.34902, 1)
+color = Color(0.501961, 0.466667, 0.298039, 1)
+
+[node name="Label2" type="Label" parent="Middle"]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 1006.0
+offset_right = 1130.0
+offset_bottom = 1075.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+theme_override_font_sizes/font_size = 14
+text = "Carrier Fleet "
+label_settings = SubResource("LabelSettings_qwshj")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="topRight" type="Control" parent="." node_paths=PackedStringArray("_health", "_sheilds")]
 anchors_preset = 0
@@ -85,7 +97,7 @@ offset_top = -303.0
 offset_right = 875.0
 offset_bottom = -149.0
 rotation = 0.982906
-color = Color(0.34902, 0.34902, 0.34902, 1)
+color = Color(0.501961, 0.466667, 0.298039, 1)
 
 [node name="trTriangle" type="ColorRect" parent="topRight"]
 layout_mode = 0
@@ -94,67 +106,14 @@ offset_top = -127.0
 offset_right = 2139.0
 offset_bottom = 27.0
 rotation = 0.652969
-color = Color(0.34902, 0.34902, 0.34902, 1)
+color = Color(0.501961, 0.466667, 0.298039, 1)
 
 [node name="trRect" type="ColorRect" parent="topRight"]
 layout_mode = 0
 offset_left = 1223.0
 offset_right = 1811.0
 offset_bottom = 70.0
-color = Color(0.34902, 0.34902, 0.34902, 1)
-
-[node name="Label" type="Label" parent="topRight"]
-layout_mode = 0
-offset_left = 601.0
-offset_top = 7.0
-offset_right = 916.0
-offset_bottom = 76.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
-text = "Carrier Fleet "
-
-[node name="TextureRect" type="TextureRect" parent="topRight"]
-layout_mode = 0
-offset_left = 1553.0
-offset_right = 1643.0
-offset_bottom = 54.0
-texture = ExtResource("1_w371h")
-expand_mode = 1
-
-[node name="icon" type="TextureRect" parent="topRight"]
-layout_mode = 0
-offset_left = 1860.0
-offset_top = 75.0
-offset_right = 1903.0
-offset_bottom = 104.0
-texture = ExtResource("1_w371h")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="topRight"]
-layout_mode = 0
-offset_left = 1731.0
-offset_top = 2.0
-offset_right = 1821.0
-offset_bottom = 56.0
-texture = ExtResource("1_w371h")
-expand_mode = 1
-
-[node name="ColorRect" type="ColorRect" parent="topRight"]
-material = SubResource("ShaderMaterial_nxvpl")
-layout_mode = 0
-offset_left = 1664.0
-offset_top = 18.0
-offset_right = 1712.0
-offset_bottom = 52.0
-color = Color(0.990596, 0, 0.258495, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="topRight"]
-layout_mode = 0
-offset_left = 1841.0
-offset_top = 23.0
-offset_right = 1889.0
-offset_bottom = 57.0
-color = Color(0.990596, 0, 0.258495, 1)
+color = Color(0.501961, 0.466667, 0.298039, 1)
 
 [node name="HSlider" type="HSlider" parent="topRight"]
 layout_mode = 0
@@ -165,7 +124,7 @@ offset_bottom = 105.0
 value = 5.0
 editable = false
 scrollable = false
-script = ExtResource("2_nxvpl")
+script = SubResource("CSharpScript_hfhsn")
 
 [node name="HSlider2" type="HSlider" parent="topRight"]
 layout_mode = 0
@@ -177,6 +136,72 @@ value = 5.0
 editable = false
 scrollable = false
 
+[node name="topColorRect" type="ColorRect" parent="topRight"]
+layout_mode = 0
+offset_left = 582.0
+offset_top = -1.0
+offset_right = 1228.0
+offset_bottom = 37.0
+scale = Vector2(1, 1.88)
+color = Color(0.501961, 0.466667, 0.298039, 1)
+
+[node name="Label" type="Label" parent="topRight"]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 7.0
+offset_right = 916.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+theme_override_font_sizes/font_size = 36
+text = "7th Fleet, USSF Intrepid"
+label_settings = SubResource("LabelSettings_48q88")
+
+[node name="Label2" type="Label" parent="topRight"]
+layout_mode = 0
+offset_left = 1218.0
+offset_top = 18.0
+offset_right = 1258.0
+offset_bottom = 41.0
+theme_override_colors/font_shadow_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+text = "Score : "
+label_settings = SubResource("LabelSettings_hfhsn")
+
+[node name="Label3" type="Label" parent="topRight"]
+layout_mode = 0
+offset_left = 1413.0
+offset_top = 21.0
+offset_right = 1453.0
+offset_bottom = 44.0
+theme_override_colors/font_shadow_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+text = "Score : "
+label_settings = SubResource("LabelSettings_hfhsn")
+
+[node name="Label4" type="Label" parent="topRight"]
+layout_mode = 0
+offset_left = 1612.0
+offset_top = 27.0
+offset_right = 1652.0
+offset_bottom = 50.0
+theme_override_colors/font_shadow_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+text = "Score : "
+label_settings = SubResource("LabelSettings_hfhsn")
+
+[node name="Label5" type="Label" parent="topRight"]
+layout_mode = 0
+offset_left = 1810.0
+offset_top = 15.0
+offset_right = 1850.0
+offset_bottom = 38.0
+theme_override_colors/font_shadow_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+text = "Score : "
+label_settings = SubResource("LabelSettings_hfhsn")
+
 [node name="Control" type="Control" parent="."]
 visible = false
 anchors_preset = 0
@@ -184,29 +209,33 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="End" type="TextureRect" parent="Control"]
-self_modulate = Color(0, 0.419608, 0, 0.556863)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -3982.0
 offset_top = -2681.0
 offset_right = 4383.0
 offset_bottom = 2748.0
-texture = ExtResource("5_qwshj")
+scale = Vector2(1.36984, 1.31583)
+texture = ExtResource("3_hfhsn")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_shadow_color = Color(0.105882, 0.0862745, 0.00392157, 1)
+theme_override_colors/font_outline_color = Color(0.105882, 0.0862745, 0.00392157, 1)
 text = "A New Hope emrges
 "
+label_settings = SubResource("LabelSettings_hfhsn")
 
 [node name="Death" type="TextureRect" parent="."]
 visible = false
-self_modulate = Color(1, 0, 0, 0.556863)
-layout_mode = 0
-offset_left = -3982.0
-offset_top = -2681.0
-offset_right = 4383.0
-offset_bottom = 2748.0
-texture = ExtResource("5_qwshj")
+self_modulate = Color(0.752941, 0, 0, 1)
+offset_left = -344.0
+offset_top = -348.0
+offset_right = 8021.0
+offset_bottom = 5081.0
+scale = Vector2(0.65343, 0.34171)
+texture = ExtResource("5_48q88")
 expand_mode = 1
