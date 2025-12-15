@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhw3kxw8ujaim"]
+[gd_scene load_steps=3 format=3 uid="uid://dfm80uwil1lju"]
 
 [ext_resource type="Script" uid="uid://bc86mcw51qpqv" path="res://Scripts/MainMenu.cs" id="1_28flt"]
 [ext_resource type="Texture2D" uid="uid://c6sfwq5ocl3mx" path="res://Assets/pixilart-sprite.png" id="2_48xlc"]
